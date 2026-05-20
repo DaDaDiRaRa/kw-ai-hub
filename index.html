@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Lab</title>
+  <style>
+    :root {
+      --bg: #0c0c10;
+      --bg2: #13131a;
+      --surface: #1c1c24;
+      --surface-h: #24242f;
+      --border: #2e2e3e;
+      --text: #e8e8f2;
+      --muted: #7878a0;
+      --accent: #6366f1;
+      --radius: 18px;
+    }
+    [data-theme="light"] {
+      --bg: #f0f0f7;
+      --bg2: #e8e8f0;
+      --surface: #ffffff;
+      --surface-h: #f5f5fc;
+      --border: #dcdce8;
+      --text: #18182a;
+      --muted: #6060808;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Pretendard', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 52px 52px 0;
+    }
+
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(130deg, #6366f1 0%, #a855f7 60%, #ec4899 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logo span { font-size: 13px; font-weight: 400; opacity: 0.5; margin-left: 10px; vertical-align: middle; -webkit-text-fill-color: var(--muted); }
+
+    .theme-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 18px;
+      border-radius: 40px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .theme-btn:hover { background: var(--surface-h); }
+
+    /* ── Search ── */
+    .search-wrap {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 17px;
+      pointer-events: none;
+    }
+    .search-input {
+      width: 100%;
+      max-width: 500px;
+      padding: 14px 20px 14px 50px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      color: var(--text);
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .search-input::placeholder { color: var(--muted); }
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(99,102,241,0.15);
+    }
+
+    /* ── Filter Chips ── */
+    .chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 44px;
+    }
+    .chip {
+      padding: 7px 18px;
+      border-radius: 40px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .chip:hover { border-color: var(--accent); color: var(--text); }
+    .chip.on {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* ── Grid ── */
+    main {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 52px 100px;
+    }
+
+    .count {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 18px;
+    }
+
+    /* ── Card ── */
+    .card {
+      --c: #6366f1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px 26px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition:
+        transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.28s ease,
+        border-color 0.2s;
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at top left, var(--c), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-7px) scale(1.015);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.35);
+      border-color: var(--c);
+    }
+    .card:hover::after { opacity: 0.07; }
+
+    /* icon */
+    .card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+
+    .icon-box {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      background: linear-gradient(135deg, var(--c), color-mix(in srgb, var(--c) 70%, white));
+      flex-shrink: 0;
+    }
+
+    /* status */
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    .dot.on  { background: #22c55e; box-shadow: 0 0 7px rgba(34,197,94,0.6); }
+    .dot.off { background: #555; }
+    .dot.ext { background: var(--c); }
+
+    /* body */
+    .card-title { font-size: 17px; font-weight: 700; letter-spacing: -0.2px; }
+    .card-desc  { font-size: 13px; color: var(--muted); line-height: 1.65; flex: 1; }
+
+    /* footer */
+    .card-foot { display: flex; align-items: center; justify-content: space-between; }
+    .tags { display: flex; gap: 5px; flex-wrap: wrap; }
+    .tag {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 8px;
+      background: rgba(99,102,241,0.1);
+      border: 1px solid rgba(99,102,241,0.2);
+      color: var(--accent);
+    }
+    .arrow {
+      font-size: 18px;
+      opacity: 0.3;
+      transform: rotate(0deg);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .card:hover .arrow { opacity: 1; transform: translate(2px, -2px); }
+
+    /* ── Empty ── */
+    .empty {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 100px 20px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 700px) {
+      header, main { padding-left: 20px; padding-right: 20px; }
+      .grid { grid-template-columns: 1fr; }
+      .logo span { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-row">
+    <div class="logo">⚗️ My Lab <span>내 프로젝트 허브</span></div>
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">☀️ 라이트</button>
+  </div>
+
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" id="searchInput" type="text"
+      placeholder="앱 이름, 설명, 태그 검색..." oninput="render()">
+  </div>
+
+  <div class="chips" id="chips"></div>
+</header>
+
+<main>
+  <div class="count" id="countLabel"></div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<script>
+/* =====================================================
+   ✏️  여기에 앱 목록을 추가/수정하세요
+   type: "local"    → React/Vue 등 localhost 앱
+         "python"   → FastAPI / Flask 등 Python 서버
+         "html"     → 로컬 HTML 파일 (file:// 경로)
+         "external" → 외부 URL (GitHub Pages 등)
+   ===================================================== */
+const APPS = [
+  {
+  name: "건축 법규 자동 진단",
+  desc: "대지 주소 입력 → 용도지역·건폐율·용적률·높이제한 자동 산출. Claude AI 법규 해석 포함.",
+  url: "https://arch-law-diagnose-30350777436.asia-northeast3.run.app",
+  icon: "🏛️",
+  tags: ["법규", "진단", "FastAPI", "React"],
+  color: "#6366f1",
+  type: "external",
+  },
+  {
+    name: "FastAPI 서버",
+    desc: "Python FastAPI 백엔드. /docs 에서 Swagger UI를 확인할 수 있습니다.",
+    url: "http://localhost:8000/docs",
+    icon: "🐍",
+    tags: ["Python", "API", "Backend"],
+    color: "#f59e0b",
+    type: "python",
+  },
+  {
+    name: "HTML 프로젝트",
+    desc: "로컬 HTML 파일로 만든 프로젝트. 경로를 url에 직접 입력하세요.",
+    url: "file:///C:/Users/20260102/projects/my-project/index.html",
+    icon: "🌐",
+    tags: ["HTML", "CSS", "JS"],
+    color: "#10b981",
+    type: "html",
+  },
+  {
+    name: "GitHub Pages",
+    desc: "배포된 외부 웹사이트. 클릭하면 새 탭에서 열립니다.",
+    url: "https://github.com",
+    icon: "🚀",
+    tags: ["배포", "External"],
+    color: "#ec4899",
+    type: "external",
+  },
+];
+/* ===================================================== */
+
+let activeTag = "전체";
+
+const allTags = ["전체", ...new Set(APPS.flatMap(a => a.tags))];
+
+function filtered() {
+  const q = document.getElementById("searchInput").value.toLowerCase().trim();
+  return APPS.filter(a => {
+    const tagOk = activeTag === "전체" || a.tags.includes(activeTag);
+    const qOk   = !q ||
+      a.name.toLowerCase().includes(q) ||
+      a.desc.toLowerCase().includes(q) ||
+      a.tags.some(t => t.toLowerCase().includes(q));
+    return tagOk && qOk;
+  });
+}
+
+function renderChips() {
+  document.getElementById("chips").innerHTML = allTags.map(t => `
+    <button class="chip ${t === activeTag ? 'on' : ''}" onclick="setTag('${t}')">${t}</button>
+  `).join('');
+}
+
+function setTag(t) {
+  activeTag = t;
+  renderChips();
+  render();
+}
+
+function render() {
+  const list = filtered();
+  const grid = document.getElementById("grid");
+  document.getElementById("countLabel").textContent = `${list.length}개의 프로젝트`;
+
+  if (!list.length) {
+    grid.innerHTML = `<div class="empty">🔭 검색 결과가 없습니다</div>`;
+    return;
+  }
+
+  grid.innerHTML = list.map(app => {
+    const idx = APPS.indexOf(app);
+    const isLocal = app.type === "local" || app.type === "python";
+    const dotClass = app.type === "external" ? "ext" : "off";
+    const statusText = app.type === "external" ? "외부" : app.type === "html" ? "파일" : "확인 중…";
+
+    return `
+    <a class="card" href="${app.url}" target="_blank" rel="noopener noreferrer"
+       style="--c:${app.color}" id="card-${idx}">
+      <div class="card-top">
+        <div class="icon-box">${app.icon}</div>
+        <div class="status">
+          <span class="dot ${dotClass}" id="dot-${idx}"></span>
+          <span id="stxt-${idx}">${statusText}</span>
+        </div>
+      </div>
+      <div class="card-title">${app.name}</div>
+      <div class="card-desc">${app.desc}</div>
+      <div class="card-foot">
+        <div class="tags">${app.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+        <span class="arrow">↗</span>
+      </div>
+    </a>`;
+  }).join('');
+
+  // 로컬 서버 상태 체크
+  list.forEach(app => {
+    if (app.type === "local" || app.type === "python") {
+      pingApp(app, APPS.indexOf(app));
+    }
+  });
+}
+
+async function pingApp(app, idx) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 2500);
+  try {
+    await fetch(app.url, { mode: "no-cors", signal: ctrl.signal });
+    clearTimeout(timer);
+    setDot(idx, "on", "실행 중");
+  } catch (e) {
+    clearTimeout(timer);
+    setDot(idx, "off", e.name === "AbortError" ? "응답 없음" : "중지됨");
+  }
+}
+
+function setDot(idx, cls, txt) {
+  const d = document.getElementById(`dot-${idx}`);
+  const t = document.getElementById(`stxt-${idx}`);
+  if (d) d.className = `dot ${cls}`;
+  if (t) t.textContent = txt;
+}
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const dark = html.getAttribute("data-theme") === "dark";
+  html.setAttribute("data-theme", dark ? "light" : "dark");
+  document.getElementById("themeBtn").textContent = dark ? "🌙 다크" : "☀️ 라이트";
+}
+
+renderChips();
+render();
+</script>
+</body>
+</html>
