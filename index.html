@@ -441,7 +441,7 @@
   </div>
 
   <div class="filter-section">
-    <span class="filter-label">태그</span>
+    <span class="filter-label">카테고리</span>
     <div class="chips" id="chips"></div>
   </div>
 </header>
@@ -486,6 +486,7 @@ const APPS = [
     color: "#6366f1",
     type: "external",
     status: "live",
+    category: "법규",
   },
   {
     name: "현상 공모 비교분석",
@@ -496,6 +497,7 @@ const APPS = [
     color: "#f59e0b",
     type: "external",
     status: "live",
+    category: "공모",
   },
   {
     name: "AutoDWG Cross-Checker",
@@ -506,6 +508,7 @@ const APPS = [
     color: "#10b981",
     type: "external",
     status: "beta",
+    category: "도면",
   },
   {
     name: "AI 조감도 렌더링",
@@ -516,6 +519,7 @@ const APPS = [
     color: "#6366f1",
     type: "external",
     status: "live",
+    category: "렌더",
   },
 
   // ─── S 티어 ───────────────────────────────────────────────────────────────
@@ -529,6 +533,7 @@ const APPS = [
     color: "#0d9488",
     type: "external",
     status: "idea",
+    category: "법규",
   },
   {
     name: "복합 건물 볼륨 최적화기",
@@ -540,6 +545,7 @@ const APPS = [
     color: "#7c3aed",
     type: "external",
     status: "idea",
+    category: "3D",
   },
   {
     name: "BIM 법규 준수 체커",
@@ -551,6 +557,7 @@ const APPS = [
     color: "#2563eb",
     type: "external",
     status: "idea",
+    category: "도면",
   },
   {
     name: "일조 분석 + 건물 높이 최적화기",
@@ -562,8 +569,9 @@ const APPS = [
     color: "#d97706",
     type: "external",
     status: "idea",
+    category: "3D",
   },
- 
+
   // ─── A 티어 ───────────────────────────────────────────────────────────────
   {
     name: "주변 건물 3D 맥락 뷰어",
@@ -575,6 +583,7 @@ const APPS = [
     color: "#0891b2",
     type: "external",
     status: "idea",
+    category: "3D",
   },
   {
     name: "건폐율·용적률 계산기",
@@ -586,6 +595,7 @@ const APPS = [
     color: "#16a34a",
     type: "external",
     status: "idea",
+    category: "법규",
   },
   {
     name: "AI 시방서 자동 생성기",
@@ -597,6 +607,7 @@ const APPS = [
     color: "#db2777",
     type: "external",
     status: "idea",
+    category: "문서",
   },
   {
     name: "회의록 자동 생성기",
@@ -608,6 +619,7 @@ const APPS = [
     color: "#4f46e5",
     type: "external",
     status: "idea",
+    category: "문서",
   },
   {
     name: "인허가 서류 자동화기",
@@ -619,6 +631,7 @@ const APPS = [
     color: "#ea580c",
     type: "external",
     status: "idea",
+    category: "법규",
   },
   {
     name: "설계안 비교 AI 리포트",
@@ -630,6 +643,7 @@ const APPS = [
     color: "#7c3aed",
     type: "external",
     status: "idea",
+    category: "문서",
   },
   {
     name: "도면 완성도 AI 체커",
@@ -641,6 +655,7 @@ const APPS = [
     color: "#0d9488",
     type: "external",
     status: "idea",
+    category: "도면",
   },
   {
     name: "설계 변경 이력 비교기",
@@ -652,6 +667,7 @@ const APPS = [
     color: "#2563eb",
     type: "external",
     status: "idea",
+    category: "도면",
   },
   {
     name: "BIM 면적 자동 추출기",
@@ -663,6 +679,7 @@ const APPS = [
     color: "#16a34a",
     type: "external",
     status: "idea",
+    category: "도면",
   },
   {
     name: "주차 배치 자동 계획기",
@@ -674,6 +691,7 @@ const APPS = [
     color: "#d97706",
     type: "external",
     status: "idea",
+    category: "법규",
   },
   {
     name: "클라이언트 보고서 자동화",
@@ -685,6 +703,7 @@ const APPS = [
     color: "#db2777",
     type: "external",
     status: "idea",
+    category: "문서",
   },
  
   // ─── B 티어 ───────────────────────────────────────────────────────────────
@@ -698,6 +717,7 @@ const APPS = [
     color: "#0891b2",
     type: "external",
     status: "idea",
+    category: "도면",
   },
   {
     name: "타이틀블록 일괄 업데이트",
@@ -709,6 +729,7 @@ const APPS = [
     color: "#4f46e5",
     type: "external",
     status: "idea",
+    category: "도면",
   },
   {
     name: "마감재 일람표 정리기",
@@ -720,6 +741,7 @@ const APPS = [
     color: "#ea580c",
     type: "external",
     status: "idea",
+    category: "도면",
   },
   {
     name: "도면 출력 설정 검증기",
@@ -731,6 +753,7 @@ const APPS = [
     color: "#16a34a",
     type: "external",
     status: "idea",
+    category: "도면",
   },
   {
     name: "건축법규 체크리스트",
@@ -742,6 +765,7 @@ const APPS = [
     color: "#7c3aed",
     type: "external",
     status: "idea",
+    category: "법규",
   },
   {
     name: "면적 산정 자동화기",
@@ -753,6 +777,7 @@ const APPS = [
     color: "#0d9488",
     type: "external",
     status: "idea",
+    category: "도면",
   },
   {
     name: "협력사 도면 수수 관리",
@@ -764,6 +789,7 @@ const APPS = [
     color: "#2563eb",
     type: "external",
     status: "idea",
+    category: "도면",
   },
   {
     name: "설계 공정표 자동 생성",
@@ -775,6 +801,7 @@ const APPS = [
     color: "#d97706",
     type: "external",
     status: "idea",
+    category: "관리",
   },
   {
     name: "VE 대안 비용 비교기",
@@ -786,6 +813,7 @@ const APPS = [
     color: "#db2777",
     type: "external",
     status: "idea",
+    category: "관리",
   },
   {
     name: "엔지니어링 미결 추적기",
@@ -797,6 +825,7 @@ const APPS = [
     color: "#ea580c",
     type: "external",
     status: "idea",
+    category: "관리",
   },
   {
     name: "수주 파이프라인 CRM",
@@ -808,6 +837,7 @@ const APPS = [
     color: "#4f46e5",
     type: "external",
     status: "idea",
+    category: "관리",
   },
   {
     name: "제안서 AI 초안 생성기",
@@ -819,6 +849,7 @@ const APPS = [
     color: "#16a34a",
     type: "external",
     status: "idea",
+    category: "공모",
   },
   {
     name: "공모전 정보 자동 수집기",
@@ -830,6 +861,7 @@ const APPS = [
     color: "#0891b2",
     type: "external",
     status: "idea",
+    category: "공모",
   },
   {
     name: "다중 프로젝트 대시보드",
@@ -841,6 +873,7 @@ const APPS = [
     color: "#7c3aed",
     type: "external",
     status: "idea",
+    category: "관리",
   },
   {
     name: "인력 배치 최적화 도구",
@@ -852,6 +885,7 @@ const APPS = [
     color: "#0d9488",
     type: "external",
     status: "idea",
+    category: "관리",
   },
   {
     name: "포트폴리오 자동 정리기",
@@ -863,6 +897,7 @@ const APPS = [
     color: "#db2777",
     type: "external",
     status: "idea",
+    category: "공모",
   },
   {
     name: "레퍼런스 리서치 자동화",
@@ -874,6 +909,7 @@ const APPS = [
     color: "#2563eb",
     type: "external",
     status: "idea",
+    category: "문서",
   },
  
   // ─── 문서 자동화 ───────────────────────────────────────────────────────────
@@ -887,6 +923,7 @@ const APPS = [
     color: "#0d9488",
     type: "external",
     status: "idea",
+    category: "문서",
   },
   {
     name: "설계 계약서 검토기",
@@ -898,6 +935,7 @@ const APPS = [
     color: "#7c3aed",
     type: "external",
     status: "idea",
+    category: "문서",
   },
   {
     name: "사내 문서 RAG 검색기",
@@ -909,6 +947,7 @@ const APPS = [
     color: "#ea580c",
     type: "external",
     status: "idea",
+    category: "문서",
   },
   {
     name: "대관 공문 자동 작성기",
@@ -920,6 +959,7 @@ const APPS = [
     color: "#16a34a",
     type: "external",
     status: "idea",
+    category: "문서",
   },
   {
     name: "건원 브랜드 PPT 생성기",
@@ -931,6 +971,7 @@ const APPS = [
     color: "#d97706",
     type: "external",
     status: "idea",
+    category: "문서",
   },
  
   // ─── 신규 추가 ───────────────────────────────────────────────────────────────
@@ -944,6 +985,7 @@ const APPS = [
     color: "#0891b2",
     type: "external",
     status: "idea",
+    category: "법규",
   },
   {
     name: "GIS → 3D 대지 모델 생성기",
@@ -955,6 +997,7 @@ const APPS = [
     color: "#16a34a",
     type: "external",
     status: "idea",
+    category: "3D",
   },
   {
     name: "건축법규 조문 검색기",
@@ -966,6 +1009,7 @@ const APPS = [
     color: "#4f46e5",
     type: "external",
     status: "idea",
+    category: "법규",
   },
   {
     name: "AI 평면 배치 생성기",
@@ -977,6 +1021,7 @@ const APPS = [
     color: "#d97706",
     type: "external",
     status: "idea",
+    category: "3D",
   },
   {
     name: "DXF 도면 자동 생성기",
@@ -988,6 +1033,7 @@ const APPS = [
     color: "#7c3aed",
     type: "external",
     status: "idea",
+    category: "도면",
   },
   {
     name: "사내 업무 가이드봇",
@@ -999,6 +1045,7 @@ const APPS = [
     color: "#db2777",
     type: "external",
     status: "idea",
+    category: "문서",
   },
  
   // ─── 멀티모달 API 신규 추가 ────────────────────────────────────────────────
@@ -1012,6 +1059,7 @@ const APPS = [
     color: "#ea580c",
     type: "external",
     status: "idea",
+    category: "관리",
   },
   {
     name: "건축 레퍼런스 이미지 분석기",
@@ -1023,6 +1071,7 @@ const APPS = [
     color: "#7c3aed",
     type: "external",
     status: "idea",
+    category: "렌더",
   },
   {
     name: "발표 자료 자동 내레이션",
@@ -1034,6 +1083,7 @@ const APPS = [
     color: "#db2777",
     type: "external",
     status: "idea",
+    category: "문서",
   },
   {
     name: "건축 도면·문서 번역기",
@@ -1045,6 +1095,7 @@ const APPS = [
     color: "#0891b2",
     type: "external",
     status: "idea",
+    category: "문서",
   },
   {
     name: "현장 음성 업무 메모",
@@ -1056,6 +1107,7 @@ const APPS = [
     color: "#16a34a",
     type: "external",
     status: "idea",
+    category: "관리",
   },
   {
     name: "투시도 스타일 변환기",
@@ -1067,6 +1119,7 @@ const APPS = [
     color: "#d97706",
     type: "external",
     status: "idea",
+    category: "렌더",
   },
   {
     name: "건물 3D 투어 영상 생성기",
@@ -1078,14 +1131,25 @@ const APPS = [
     color: "#4f46e5",
     type: "external",
     status: "idea",
+    category: "렌더",
   },
 ];
 /* ===================================================== */
 
-let activeTag    = "전체";
-let activeStatus = "전체";
+let activeCategory = "전체";
+let activeStatus   = "전체";
 
-const allTags = ["전체", ...new Set(APPS.flatMap(a => a.tags))];
+const CATEGORIES = [
+  { key: "전체", label: "전체"         },
+  { key: "법규", label: "법규/인허가"  },
+  { key: "도면", label: "도면·BIM"     },
+  { key: "3D",   label: "3D 모델링"    },
+  { key: "렌더", label: "이미지·렌더링"},
+  { key: "문서", label: "AI 문서"      },
+  { key: "관리", label: "프로젝트 관리"},
+  { key: "공모", label: "공모/제안"    },
+];
+
 const allStatuses = [
   { key: "전체", label: "전체" },
   ...Object.entries(STATUS_MAP).map(([key, v]) => ({ key, label: v.label })),
@@ -1094,13 +1158,13 @@ const allStatuses = [
 function filtered() {
   const q = document.getElementById("searchInput").value.toLowerCase().trim();
   return APPS.filter(a => {
-    const tagOk    = activeTag === "전체" || a.tags.includes(activeTag);
+    const catOk    = activeCategory === "전체" || a.category === activeCategory;
     const statusOk = activeStatus === "전체" || a.status === activeStatus;
     const qOk      = !q ||
       a.name.toLowerCase().includes(q) ||
       a.desc.toLowerCase().includes(q) ||
       a.tags.some(t => t.toLowerCase().includes(q));
-    return tagOk && statusOk && qOk;
+    return catOk && statusOk && qOk;
   });
 }
 
@@ -1112,14 +1176,14 @@ function renderChips() {
       onclick="setStatus('${s.key}')">${s.label}</button>
   `).join('');
 
-  // Tag chips
-  document.getElementById("chips").innerHTML = allTags.map(t => `
-    <button class="chip ${t === activeTag ? 'on' : ''}" onclick="setTag('${t}')">${t}</button>
+  // Category chips
+  document.getElementById("chips").innerHTML = CATEGORIES.map(c => `
+    <button class="chip ${c.key === activeCategory ? 'on' : ''}" onclick="setCategory('${c.key}')">${c.label}</button>
   `).join('');
 }
 
-function setTag(t) {
-  activeTag = t;
+function setCategory(c) {
+  activeCategory = c;
   renderChips();
   render();
 }
