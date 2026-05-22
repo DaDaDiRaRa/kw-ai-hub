@@ -77,7 +77,7 @@
     /* ── Search ── */
     .search-wrap {
       position: relative;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
     .search-icon {
       position: absolute;
@@ -105,12 +105,26 @@
       box-shadow: 0 0 0 4px rgba(99,102,241,0.15);
     }
 
+    /* ── Filter Section ── */
+    .filter-section {
+      margin-bottom: 10px;
+    }
+    .filter-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: block;
+    }
+
     /* ── Filter Chips ── */
     .chips {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
-      margin-bottom: 44px;
+      margin-bottom: 16px;
     }
     .chip {
       padding: 7px 18px;
@@ -129,6 +143,30 @@
       border-color: var(--accent);
       color: #fff;
     }
+
+    /* Status chip active colors */
+    .chip.on[data-status="live"]     { background: #22c55e; border-color: #22c55e; }
+    .chip.on[data-status="beta"]     { background: #eab308; border-color: #eab308; }
+    .chip.on[data-status="building"] { background: #3b82f6; border-color: #3b82f6; }
+    .chip.on[data-status="draft"]    { background: #94a3b8; border-color: #94a3b8; }
+    .chip.on[data-status="idea"]     { background: #a855f7; border-color: #a855f7; }
+
+    /* ── Status Badge ── */
+    .status-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+      letter-spacing: 0.1px;
+    }
+    .badge-live     { background: rgba(34,197,94,0.15);  color: #22c55e; border: 1px solid rgba(34,197,94,0.35); }
+    .badge-beta     { background: rgba(234,179,8,0.15);  color: #ca8a04; border: 1px solid rgba(234,179,8,0.35); }
+    [data-theme="dark"] .badge-beta { color: #eab308; }
+    .badge-building { background: rgba(59,130,246,0.15); color: #3b82f6; border: 1px solid rgba(59,130,246,0.35); }
+    .badge-draft    { background: rgba(148,163,184,0.15);color: #64748b; border: 1px solid rgba(148,163,184,0.35); }
+    [data-theme="dark"] .badge-draft { color: #94a3b8; }
+    .badge-idea     { background: rgba(168,85,247,0.15); color: #a855f7; border: 1px solid rgba(168,85,247,0.35); }
 
     /* ── Grid ── */
     main {
@@ -167,7 +205,8 @@
       transition:
         transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
         box-shadow 0.28s ease,
-        border-color 0.2s;
+        border-color 0.2s,
+        opacity 0.2s;
     }
 
     .card::after {
@@ -187,6 +226,15 @@
     }
     .card:hover::after { opacity: 0.07; }
 
+    /* No-URL card (idea/draft with no link) */
+    .card.no-url {
+      cursor: default;
+      opacity: 0.75;
+    }
+    .card.no-url:hover {
+      opacity: 1;
+    }
+
     /* icon */
     .card-top { display: flex; justify-content: space-between; align-items: flex-start; }
 
@@ -201,25 +249,6 @@
       background: linear-gradient(135deg, var(--c), color-mix(in srgb, var(--c) 70%, white));
       flex-shrink: 0;
     }
-
-    /* status */
-    .status {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 11px;
-      color: var(--muted);
-      font-weight: 500;
-    }
-    .dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--border);
-      transition: background 0.4s, box-shadow 0.4s;
-    }
-    .dot.on  { background: #22c55e; box-shadow: 0 0 7px rgba(34,197,94,0.6); }
-    .dot.off { background: #555; }
-    .dot.ext { background: var(--c); }
 
     /* body */
     .card-title { font-size: 17px; font-weight: 700; letter-spacing: -0.2px; }
@@ -276,7 +305,15 @@
       placeholder="앱 이름, 설명, 태그 검색..." oninput="render()">
   </div>
 
-  <div class="chips" id="chips"></div>
+  <div class="filter-section">
+    <span class="filter-label">상태</span>
+    <div class="chips" id="statusChips"></div>
+  </div>
+
+  <div class="filter-section">
+    <span class="filter-label">태그</span>
+    <div class="chips" id="chips"></div>
+  </div>
 </header>
 
 <main>
@@ -291,18 +328,34 @@
          "python"   → FastAPI / Flask 등 Python 서버
          "html"     → 로컬 HTML 파일 (file:// 경로)
          "external" → 외부 URL (GitHub Pages 등)
+
+   status: "live"     → 🟢 완성  (정상 운영 중)
+           "beta"     → 🟡 베타  (사용 가능, 일부 오류)
+           "building" → 🔵 개발중 (오류 많아 업데이트 중)
+           "draft"    → ⚪ 초안  (완전 초안, 미완성)
+           "idea"     → 💡 아이디어 (기획 단계)
    ===================================================== */
+
+const STATUS_MAP = {
+  live:     { label: "🟢 완성",     cls: "badge-live",     text: "완성"    },
+  beta:     { label: "🟡 베타",     cls: "badge-beta",     text: "베타"    },
+  building: { label: "🔵 개발중",   cls: "badge-building", text: "개발중"  },
+  draft:    { label: "⚪ 초안",     cls: "badge-draft",    text: "초안"    },
+  idea:     { label: "💡 아이디어", cls: "badge-idea",     text: "아이디어"},
+};
+
 const APPS = [
   {
-  name: "건축 법규 자동 진단",
-  desc: "대지 주소 입력 → 용도지역·건폐율·용적률·높이제한 자동 산출. Claude AI 법규 해석 포함.",
-  url: "https://arch-law-diagnose-30350777436.asia-northeast3.run.app",
-  icon: "🏛️",
-  tags: ["법규", "진단", "FastAPI", "React"],
-  color: "#6366f1",
-  type: "external",
+    name: "건축 법규 자동 진단",
+    desc: "대지 주소 입력 → 용도지역·건폐율·용적률·높이제한 자동 산출. Claude AI 법규 해석 포함.",
+    url: "https://arch-law-diagnose-30350777436.asia-northeast3.run.app",
+    icon: "🏛️",
+    tags: ["법규", "진단", "FastAPI", "React"],
+    color: "#6366f1",
+    type: "external",
+    status: "live",
   },
-   {
+  {
     name: "현상 공모 비교분석",
     desc: "공모전 제출작 PDF 업로드 → AI 분석 및 당선작 패턴 비교.",
     url: "https://competition-analyzer-30350777436.asia-northeast3.run.app",
@@ -310,26 +363,30 @@ const APPS = [
     tags: ["공모전", "분석", "FastAPI", "React"],
     color: "#f59e0b",
     type: "external",
+    status: "live",
   },
   {
-  name: "AutoDWG Cross-Checker",
-  desc: "도면목록표 DWG ↔ 개별 캐드 도면 자동 교차 검토. 도면번호·명칭·축척 불일치 항목 Excel 리포트 출력.",
-  url: "https://autodwg-checker-30350777436.asia-northeast3.run.app",
-  icon: "📐",
-  tags: ["도면", "CAD", "검토", "FastAPI", "React"],
-  color: "#10b981",
-  type: "external",
+    name: "AutoDWG Cross-Checker",
+    desc: "도면목록표 DWG ↔ 개별 캐드 도면 자동 교차 검토. 도면번호·명칭·축척 불일치 항목 Excel 리포트 출력.",
+    url: "https://autodwg-checker-30350777436.asia-northeast3.run.app",
+    icon: "📐",
+    tags: ["도면", "CAD", "검토", "FastAPI", "React"],
+    color: "#10b981",
+    type: "external",
+    status: "beta",
   },
   {
-  name: "스케치 렌더링",
-  desc: "건축 스케치 이미지 업로드 → Gemini AI가 실사 외관 렌더링으로 변환.",
-  url: "https://sketch2render-app-30350777436.asia-northeast3.run.app",
-  icon: "🏗️",
-  tags: ["건축", "렌더링", "Gemini", "FastAPI", "React"],
-  color: "#6366f1",
-  type: "external",
-},
-// ─── S 티어 ───────────────────────────────────────────────────────────────
+    name: "AI 조감도 렌더링",
+    desc: "건축 스케치 이미지 업로드 → Gemini AI가 실사 외관 렌더링으로 변환.",
+    url: "https://sketch2render-app-30350777436.asia-northeast3.run.app",
+    icon: "🏗️",
+    tags: ["조감도", "렌더링", "Gemini Model", "FastAPI", "React"],
+    color: "#6366f1",
+    type: "external",
+    status: "live",
+  },
+
+  // ─── S 티어 ───────────────────────────────────────────────────────────────
   {
     name: "대지 자동 파이프라인",
     desc: "주소 1개 입력 → 토지이음·세움터·브이월드 API로 용도지역·법규·건물대장·3D 맥락 자동 수집.",
@@ -338,6 +395,7 @@ const APPS = [
     tags: ["대지", "법규", "GIS", "Claude", "FastAPI", "React"],
     color: "#0d9488",
     type: "external",
+    status: "idea",
   },
   {
     name: "복합 건물 볼륨 최적화기",
@@ -347,6 +405,7 @@ const APPS = [
     tags: ["볼륨", "법규", "3D", "Claude", "토지이음", "FastAPI"],
     color: "#7c3aed",
     type: "external",
+    status: "idea",
   },
   {
     name: "BIM 법규 준수 체커",
@@ -356,6 +415,7 @@ const APPS = [
     tags: ["BIM", "IFC", "법규", "검토", "IfcOpenShell", "Claude"],
     color: "#2563eb",
     type: "external",
+    status: "idea",
   },
   {
     name: "일조·채광 시뮬레이션",
@@ -365,8 +425,9 @@ const APPS = [
     tags: ["일조", "채광", "시뮬레이션", "기상청API", "Python", "Three.js"],
     color: "#d97706",
     type: "external",
+    status: "idea",
   },
- 
+
   // ─── A 티어 ───────────────────────────────────────────────────────────────
   {
     name: "주변 건물 3D 맥락 뷰어",
@@ -376,6 +437,7 @@ const APPS = [
     tags: ["3D", "GIS", "브이월드", "CesiumJS", "FastAPI"],
     color: "#0891b2",
     type: "external",
+    status: "idea",
   },
   {
     name: "건폐율·용적률 계산기",
@@ -385,6 +447,7 @@ const APPS = [
     tags: ["법규", "면적", "토지이음", "Python", "React"],
     color: "#16a34a",
     type: "external",
+    status: "idea",
   },
   {
     name: "AI 시방서 자동 생성기",
@@ -394,6 +457,7 @@ const APPS = [
     tags: ["시방서", "문서", "Claude", "FastAPI", "React"],
     color: "#db2777",
     type: "external",
+    status: "idea",
   },
   {
     name: "회의록 자동 생성기",
@@ -403,6 +467,7 @@ const APPS = [
     tags: ["회의록", "STT", "Whisper", "Claude", "FastAPI"],
     color: "#4f46e5",
     type: "external",
+    status: "idea",
   },
   {
     name: "인허가 서류 자동화기",
@@ -412,6 +477,7 @@ const APPS = [
     tags: ["인허가", "서류", "세움터", "Claude", "FastAPI"],
     color: "#ea580c",
     type: "external",
+    status: "idea",
   },
   {
     name: "설계안 비교 AI 리포트",
@@ -421,6 +487,7 @@ const APPS = [
     tags: ["비교", "분석", "Claude", "PPT", "FastAPI", "React"],
     color: "#7c3aed",
     type: "external",
+    status: "idea",
   },
   {
     name: "도면 완성도 AI 체커",
@@ -430,6 +497,7 @@ const APPS = [
     tags: ["도면", "검토", "CAD", "ezdxf", "Claude", "FastAPI"],
     color: "#0d9488",
     type: "external",
+    status: "idea",
   },
   {
     name: "설계 변경 이력 비교기",
@@ -439,6 +507,7 @@ const APPS = [
     tags: ["도면", "변경이력", "CAD", "ezdxf", "FastAPI"],
     color: "#2563eb",
     type: "external",
+    status: "idea",
   },
   {
     name: "BIM 면적 자동 추출기",
@@ -448,6 +517,7 @@ const APPS = [
     tags: ["BIM", "IFC", "면적", "IfcOpenShell", "Python"],
     color: "#16a34a",
     type: "external",
+    status: "idea",
   },
   {
     name: "주차 배치 자동 계획기",
@@ -457,6 +527,7 @@ const APPS = [
     tags: ["주차", "법규", "배치", "shapely", "Claude", "FastAPI"],
     color: "#d97706",
     type: "external",
+    status: "idea",
   },
   {
     name: "클라이언트 보고서 자동화",
@@ -466,8 +537,9 @@ const APPS = [
     tags: ["보고서", "PPT", "Claude", "python-pptx", "FastAPI"],
     color: "#db2777",
     type: "external",
+    status: "idea",
   },
- 
+
   // ─── B 티어 ───────────────────────────────────────────────────────────────
   {
     name: "창호·문 일람표 추출기",
@@ -477,6 +549,7 @@ const APPS = [
     tags: ["도면", "일람표", "CAD", "ezdxf", "Python"],
     color: "#0891b2",
     type: "external",
+    status: "idea",
   },
   {
     name: "타이틀블록 일괄 업데이트",
@@ -486,6 +559,7 @@ const APPS = [
     tags: ["도면", "CAD", "LISP", "ezdxf", "Python"],
     color: "#4f46e5",
     type: "external",
+    status: "idea",
   },
   {
     name: "마감재 일람표 정리기",
@@ -495,6 +569,7 @@ const APPS = [
     tags: ["마감재", "일람표", "Python", "openpyxl"],
     color: "#ea580c",
     type: "external",
+    status: "idea",
   },
   {
     name: "도면 출력 배치 자동화",
@@ -504,6 +579,7 @@ const APPS = [
     tags: ["도면", "출력", "CAD", "LISP", "Python"],
     color: "#16a34a",
     type: "external",
+    status: "idea",
   },
   {
     name: "건축법규 체크리스트",
@@ -513,6 +589,7 @@ const APPS = [
     tags: ["법규", "체크리스트", "Claude", "토지이음", "FastAPI"],
     color: "#7c3aed",
     type: "external",
+    status: "idea",
   },
   {
     name: "면적 산정 자동화기",
@@ -522,6 +599,7 @@ const APPS = [
     tags: ["면적", "도면", "ezdxf", "shapely", "Python"],
     color: "#0d9488",
     type: "external",
+    status: "idea",
   },
   {
     name: "협력사 도면 수수 관리",
@@ -531,6 +609,7 @@ const APPS = [
     tags: ["도면", "관리", "협력사", "Python", "FastAPI"],
     color: "#2563eb",
     type: "external",
+    status: "idea",
   },
   {
     name: "설계 공정표 자동 생성",
@@ -540,6 +619,7 @@ const APPS = [
     tags: ["공정표", "일정", "Python", "FastAPI", "React"],
     color: "#d97706",
     type: "external",
+    status: "idea",
   },
   {
     name: "VE 대안 비용 비교기",
@@ -549,6 +629,7 @@ const APPS = [
     tags: ["VE", "비용", "비교", "Claude", "Python"],
     color: "#db2777",
     type: "external",
+    status: "idea",
   },
   {
     name: "엔지니어링 미결 추적기",
@@ -558,6 +639,7 @@ const APPS = [
     tags: ["미결", "추적", "엔지니어링", "Python", "FastAPI"],
     color: "#ea580c",
     type: "external",
+    status: "idea",
   },
   {
     name: "수주 파이프라인 CRM",
@@ -567,6 +649,7 @@ const APPS = [
     tags: ["수주", "CRM", "관리", "Python", "React"],
     color: "#4f46e5",
     type: "external",
+    status: "idea",
   },
   {
     name: "제안서 AI 초안 생성기",
@@ -576,6 +659,7 @@ const APPS = [
     tags: ["제안서", "문서", "Claude", "python-docx", "FastAPI"],
     color: "#16a34a",
     type: "external",
+    status: "idea",
   },
   {
     name: "공모전 정보 자동 수집기",
@@ -585,6 +669,7 @@ const APPS = [
     tags: ["공모전", "수집", "스크래핑", "Python", "React"],
     color: "#0891b2",
     type: "external",
+    status: "idea",
   },
   {
     name: "다중 프로젝트 대시보드",
@@ -594,6 +679,7 @@ const APPS = [
     tags: ["대시보드", "관리", "Python", "FastAPI", "React"],
     color: "#7c3aed",
     type: "external",
+    status: "idea",
   },
   {
     name: "인력 배치 최적화 도구",
@@ -603,6 +689,7 @@ const APPS = [
     tags: ["인력", "배치", "관리", "Python", "React"],
     color: "#0d9488",
     type: "external",
+    status: "idea",
   },
   {
     name: "포트폴리오 자동 정리기",
@@ -612,6 +699,7 @@ const APPS = [
     tags: ["포트폴리오", "문서", "Claude", "Gemini", "FastAPI"],
     color: "#db2777",
     type: "external",
+    status: "idea",
   },
   {
     name: "레퍼런스 리서치 자동화",
@@ -621,28 +709,42 @@ const APPS = [
     tags: ["리서치", "레퍼런스", "Claude", "Python", "FastAPI"],
     color: "#2563eb",
     type: "external",
+    status: "idea",
   },
-
 ];
 /* ===================================================== */
 
-let activeTag = "전체";
+let activeTag    = "전체";
+let activeStatus = "전체";
 
 const allTags = ["전체", ...new Set(APPS.flatMap(a => a.tags))];
+const allStatuses = [
+  { key: "전체", label: "전체" },
+  ...Object.entries(STATUS_MAP).map(([key, v]) => ({ key, label: v.label })),
+];
 
 function filtered() {
   const q = document.getElementById("searchInput").value.toLowerCase().trim();
   return APPS.filter(a => {
-    const tagOk = activeTag === "전체" || a.tags.includes(activeTag);
-    const qOk   = !q ||
+    const tagOk    = activeTag === "전체" || a.tags.includes(activeTag);
+    const statusOk = activeStatus === "전체" || a.status === activeStatus;
+    const qOk      = !q ||
       a.name.toLowerCase().includes(q) ||
       a.desc.toLowerCase().includes(q) ||
       a.tags.some(t => t.toLowerCase().includes(q));
-    return tagOk && qOk;
+    return tagOk && statusOk && qOk;
   });
 }
 
 function renderChips() {
+  // Status chips
+  document.getElementById("statusChips").innerHTML = allStatuses.map(s => `
+    <button class="chip ${s.key === activeStatus ? 'on' : ''}"
+      data-status="${s.key}"
+      onclick="setStatus('${s.key}')">${s.label}</button>
+  `).join('');
+
+  // Tag chips
   document.getElementById("chips").innerHTML = allTags.map(t => `
     <button class="chip ${t === activeTag ? 'on' : ''}" onclick="setTag('${t}')">${t}</button>
   `).join('');
@@ -654,10 +756,21 @@ function setTag(t) {
   render();
 }
 
+function setStatus(s) {
+  activeStatus = s;
+  renderChips();
+  render();
+}
+
 function render() {
   const list = filtered();
   const grid = document.getElementById("grid");
-  document.getElementById("countLabel").textContent = `${list.length}개의 프로젝트`;
+
+  // Count label shows status breakdown
+  const totalShown = list.length;
+  const liveCount  = APPS.filter(a => a.status === "live").length;
+  document.getElementById("countLabel").textContent =
+    `${totalShown}개 표시 중 · 전체 ${APPS.length}개 (운영 중 ${liveCount}개)`;
 
   if (!list.length) {
     grid.innerHTML = `<div class="empty">🔭 검색 결과가 없습니다</div>`;
@@ -665,56 +778,43 @@ function render() {
   }
 
   grid.innerHTML = list.map(app => {
-    const idx = APPS.indexOf(app);
-    const isLocal = app.type === "local" || app.type === "python";
-    const dotClass = app.type === "external" ? "ext" : "off";
-    const statusText = app.type === "external" ? "외부" : app.type === "html" ? "파일" : "확인 중…";
+    const idx     = APPS.indexOf(app);
+    const hasUrl  = app.url && app.url !== "---------";
+    const st      = STATUS_MAP[app.status] || STATUS_MAP.idea;
+    const tag     = `<span class="status-badge ${st.cls}">${st.label}</span>`;
+    const arrowEl = hasUrl ? `<span class="arrow">↗</span>` : `<span class="arrow" style="opacity:0.15;font-size:14px">🔒</span>`;
 
-    return `
-    <a class="card" href="${app.url}" target="_blank" rel="noopener noreferrer"
-       style="--c:${app.color}" id="card-${idx}">
-      <div class="card-top">
-        <div class="icon-box">${app.icon}</div>
-        <div class="status">
-          <span class="dot ${dotClass}" id="dot-${idx}"></span>
-          <span id="stxt-${idx}">${statusText}</span>
+    if (hasUrl) {
+      return `
+      <a class="card" href="${app.url}" target="_blank" rel="noopener noreferrer"
+         style="--c:${app.color}" id="card-${idx}">
+        <div class="card-top">
+          <div class="icon-box">${app.icon}</div>
+          ${tag}
         </div>
-      </div>
-      <div class="card-title">${app.name}</div>
-      <div class="card-desc">${app.desc}</div>
-      <div class="card-foot">
-        <div class="tags">${app.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-        <span class="arrow">↗</span>
-      </div>
-    </a>`;
-  }).join('');
-
-  // 로컬 서버 상태 체크
-  list.forEach(app => {
-    if (app.type === "local" || app.type === "python") {
-      pingApp(app, APPS.indexOf(app));
+        <div class="card-title">${app.name}</div>
+        <div class="card-desc">${app.desc}</div>
+        <div class="card-foot">
+          <div class="tags">${app.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+          ${arrowEl}
+        </div>
+      </a>`;
+    } else {
+      return `
+      <div class="card no-url" style="--c:${app.color}" id="card-${idx}">
+        <div class="card-top">
+          <div class="icon-box">${app.icon}</div>
+          ${tag}
+        </div>
+        <div class="card-title">${app.name}</div>
+        <div class="card-desc">${app.desc}</div>
+        <div class="card-foot">
+          <div class="tags">${app.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+          ${arrowEl}
+        </div>
+      </div>`;
     }
-  });
-}
-
-async function pingApp(app, idx) {
-  const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), 2500);
-  try {
-    await fetch(app.url, { mode: "no-cors", signal: ctrl.signal });
-    clearTimeout(timer);
-    setDot(idx, "on", "실행 중");
-  } catch (e) {
-    clearTimeout(timer);
-    setDot(idx, "off", e.name === "AbortError" ? "응답 없음" : "중지됨");
-  }
-}
-
-function setDot(idx, cls, txt) {
-  const d = document.getElementById(`dot-${idx}`);
-  const t = document.getElementById(`stxt-${idx}`);
-  if (d) d.className = `dot ${cls}`;
-  if (t) t.textContent = txt;
+  }).join('');
 }
 
 function toggleTheme() {
