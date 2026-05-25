@@ -1079,6 +1079,8 @@ const allStatuses = [
   ...Object.entries(STATUS_MAP).map(([key, v]) => ({ key, label: v.label })),
 ];
 
+const STATUS_ORDER = ["live", "beta", "building", "draft", "idea"];
+
 function filtered() {
   const q = document.getElementById("searchInput").value.toLowerCase().trim();
   return APPS.filter(a => {
@@ -1089,6 +1091,10 @@ function filtered() {
       a.desc.toLowerCase().includes(q) ||
       a.tags.some(t => t.toLowerCase().includes(q));
     return catOk && statusOk && qOk;
+  }).sort((a, b) => {
+    const si = STATUS_ORDER.indexOf(a.status) - STATUS_ORDER.indexOf(b.status);
+    if (si !== 0) return si;
+    return a.name.localeCompare(b.name, "ko");
   });
 }
 
