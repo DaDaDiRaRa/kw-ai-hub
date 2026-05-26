@@ -543,12 +543,24 @@ const APPS = [
     desc: "건축 스케치 이미지 업로드 → Gemini AI가 실사 외관 렌더링으로 변환.",
     url: "https://sketch2render-app-30350777436.asia-northeast3.run.app",
     icon: "🏗️",
-    tags: ["조감도", "렌더링", "Gemini Model", "FastAPI", "React", "유료"],
+    tags: ["조감도", "렌더링", "Gemini Model", "이미지생성", "FastAPI", "React", "유료"],
     color: "#6366f1",
     type: "external",
     status: "live",
     category: "렌더",
   },
+  {
+  name: "평면도 3D 시각화기",
+  desc: "2D 아파트 평면도 이미지 업로드 → Gemini로 구조 분석 → 아이소메트릭 3D 렌더링 자동 생성",
+  url: "https://floor-plan-3d-app-30350777436.asia-northeast3.run.app",
+  detail: "한국 아파트 2D 평면도 이미지를 업로드하면 Gemini 2.5 Pro가 벽·창·방 배치를 분석하여 이미지 생성 프롬프트를 작성하고, Gemini Flash Image 모델이 NW·NE·SW·SE 4방향 아이소메트릭 3D 렌더링을 생성한다. 실내는 모던 한국 아파트 스타일(원목 바닥·화이트 벽·가구 배치)로 자동 구성되며 결과 이미지를 PNG로 다운로드할 수 있다.",
+  icon: "🏠",
+  tags: ["평면도", "3D렌더링", "아이소메트릭", "Gemini Model", "건축시각화", "이미지생성", "유료"],
+  color: "#ea580c",
+  type: "external",
+  status: "active",
+  },
+
 
     // ─── S 티어 ───────────────────────────────────────────────────────────────
   {
