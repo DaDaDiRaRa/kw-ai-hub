@@ -127,9 +127,7 @@
     }
 
     /* ── Filter Section ── */
-    .filter-section {
-      margin-bottom: 10px;
-    }
+    .filter-section { margin-bottom: 10px; }
     .filter-label {
       font-size: 11px;
       font-weight: 700;
@@ -141,12 +139,7 @@
     }
 
     /* ── Filter Chips ── */
-    .chips {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 16px;
-    }
+    .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
     .chip {
       padding: 7px 18px;
       border-radius: 40px;
@@ -172,6 +165,11 @@
     .chip.on[data-status="draft"]    { background: #94a3b8; border-color: #94a3b8; }
     .chip.on[data-status="idea"]     { background: #a855f7; border-color: #a855f7; }
 
+    /* Tier chip active colors */
+    .chip.on[data-tier="1"] { background: #3b82f6; border-color: #3b82f6; }
+    .chip.on[data-tier="2"] { background: #d97706; border-color: #d97706; }
+    .chip.on[data-tier="3"] { background: #22c55e; border-color: #22c55e; }
+
     /* ── Status Badge ── */
     .status-badge {
       font-size: 11px;
@@ -189,19 +187,23 @@
     [data-theme="dark"] .badge-draft { color: #94a3b8; }
     .badge-idea     { background: rgba(168,85,247,0.15); color: #a855f7; border: 1px solid rgba(168,85,247,0.35); }
 
+    /* ── Tier Badge ── */
+    .tier-badge {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+      letter-spacing: 0.2px;
+    }
+    .tier-1 { background: rgba(59,130,246,0.15); color: #3b82f6; border: 1px solid rgba(59,130,246,0.35); }
+    .tier-2 { background: rgba(217,119,6,0.15);  color: #d97706; border: 1px solid rgba(217,119,6,0.35); }
+    .tier-3 { background: rgba(34,197,94,0.15);  color: #22c55e; border: 1px solid rgba(34,197,94,0.35); }
+    [data-theme="dark"] .tier-2 { color: #fbbf24; }
+
     /* ── Grid ── */
-    main {
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 0 52px 100px;
-    }
-
-    .count {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 18px;
-    }
-
+    main { max-width: 1440px; margin: 0 auto; padding: 0 52px 100px; }
+    .count { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -229,7 +231,6 @@
         border-color 0.2s,
         opacity 0.2s;
     }
-
     .card::after {
       content: '';
       position: absolute;
@@ -239,7 +240,6 @@
       transition: opacity 0.3s;
       pointer-events: none;
     }
-
     .card:hover {
       transform: translateY(-7px) scale(1.015);
       box-shadow: 0 24px 64px rgba(0,0,0,0.35);
@@ -247,14 +247,8 @@
     }
     .card:hover::after { opacity: 0.07; }
 
-    /* No-URL card (idea/draft with no link) */
-    .card.no-url {
-      cursor: pointer;
-      opacity: 0.55;
-    }
-    .card.no-url:hover {
-      opacity: 1;
-    }
+    .card.no-url { cursor: pointer; opacity: 0.55; }
+    .card.no-url:hover { opacity: 1; }
 
     /* ── Modal ── */
     .modal-overlay {
@@ -272,10 +266,7 @@
       visibility: hidden;
       transition: opacity 0.22s, visibility 0.22s;
     }
-    .modal-overlay.open {
-      opacity: 1;
-      visibility: visible;
-    }
+    .modal-overlay.open { opacity: 1; visibility: visible; }
     .modal {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -289,97 +280,58 @@
       max-height: 88vh;
       overflow-y: auto;
     }
-    .modal-overlay.open .modal {
-      transform: translateY(0) scale(1);
-    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
     .modal-close {
       position: absolute;
-      top: 16px;
-      right: 16px;
+      top: 16px; right: 16px;
       background: var(--surface-h);
       border: 1px solid var(--border);
       color: var(--muted);
-      width: 34px;
-      height: 34px;
+      width: 34px; height: 34px;
       border-radius: 50%;
       cursor: pointer;
       font-size: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       transition: background 0.2s, color 0.2s;
     }
     .modal-close:hover { background: var(--border); color: var(--text); }
-    .modal-header {
-      display: flex;
-      align-items: flex-start;
-      gap: 18px;
-      margin-bottom: 22px;
-    }
+    .modal-header { display: flex; align-items: flex-start; gap: 18px; margin-bottom: 22px; }
     .modal-icon {
-      width: 68px;
-      height: 68px;
+      width: 68px; height: 68px;
       border-radius: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px; flex-shrink: 0;
     }
     .modal-title-wrap { flex: 1; padding-top: 4px; }
+    .modal-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
     .modal-title {
-      font-size: 21px;
-      font-weight: 800;
-      letter-spacing: -0.3px;
-      margin-bottom: 10px;
-      line-height: 1.25;
+      font-size: 21px; font-weight: 800;
+      letter-spacing: -0.3px; margin-bottom: 10px; line-height: 1.25;
     }
-    .modal-divider {
-      height: 1px;
-      background: var(--border);
-      margin: 0 0 22px;
-    }
+    .modal-divider { height: 1px; background: var(--border); margin: 0 0 22px; }
     .modal-section-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--muted);
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
+      font-size: 11px; font-weight: 700; color: var(--muted);
+      letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 8px;
     }
-    .modal-desc {
-      font-size: 15px;
-      line-height: 1.75;
-      color: var(--text);
-      margin-bottom: 20px;
-    }
+    .modal-desc { font-size: 15px; line-height: 1.75; color: var(--text); margin-bottom: 20px; }
     .modal-detail {
-      font-size: 13px;
-      line-height: 1.7;
-      color: var(--muted);
-      background: var(--bg);
-      border-radius: 12px;
-      padding: 14px 16px;
-      margin-bottom: 20px;
+      font-size: 13px; line-height: 1.7; color: var(--muted);
+      background: var(--bg); border-radius: 12px;
+      padding: 14px 16px; margin-bottom: 20px;
       border-left: 3px solid var(--accent);
     }
     .modal-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 22px; }
     .modal-tag {
-      font-size: 12px;
-      font-weight: 500;
-      padding: 4px 11px;
+      font-size: 12px; font-weight: 500; padding: 4px 11px;
       border-radius: 8px;
       background: rgba(99,102,241,0.1);
       border: 1px solid rgba(99,102,241,0.2);
       color: var(--accent);
     }
     .modal-status-note {
-      font-size: 13px;
-      color: var(--muted);
-      padding: 12px 16px;
-      background: var(--bg);
-      border-radius: 10px;
-      line-height: 1.5;
+      font-size: 13px; color: var(--muted);
+      padding: 12px 16px; background: var(--bg);
+      border-radius: 10px; line-height: 1.5;
     }
     @media (max-width: 600px) {
       .modal { padding: 24px 20px; border-radius: 20px; }
@@ -388,20 +340,15 @@
 
     /* icon */
     .card-top { display: flex; justify-content: space-between; align-items: flex-start; }
-
+    .card-badges { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
     .icon-box {
-      width: 54px;
-      height: 54px;
+      width: 54px; height: 54px;
       border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-size: 26px;
       background: linear-gradient(135deg, var(--c), color-mix(in srgb, var(--c) 70%, white));
       flex-shrink: 0;
     }
-
-    /* body */
     .card-title { font-size: 17px; font-weight: 700; letter-spacing: -0.2px; }
     .card-desc  { font-size: 13px; color: var(--muted); line-height: 1.65; flex: 1; }
 
@@ -409,17 +356,14 @@
     .card-foot { display: flex; align-items: center; justify-content: space-between; }
     .tags { display: flex; gap: 5px; flex-wrap: wrap; }
     .tag {
-      font-size: 11px;
-      font-weight: 500;
-      padding: 3px 9px;
-      border-radius: 8px;
+      font-size: 11px; font-weight: 500;
+      padding: 3px 9px; border-radius: 8px;
       background: rgba(99,102,241,0.1);
       border: 1px solid rgba(99,102,241,0.2);
       color: var(--accent);
     }
     .arrow {
-      font-size: 18px;
-      opacity: 0.3;
+      font-size: 18px; opacity: 0.3;
       transform: rotate(0deg);
       transition: opacity 0.2s, transform 0.2s;
     }
@@ -427,18 +371,14 @@
 
     /* ── Empty ── */
     .empty {
-      grid-column: 1/-1;
-      text-align: center;
-      padding: 100px 20px;
-      color: var(--muted);
-      font-size: 15px;
+      grid-column: 1/-1; text-align: center;
+      padding: 100px 20px; color: var(--muted); font-size: 15px;
     }
 
     /* ── Responsive ── */
     @media (max-width: 700px) {
       header, main { padding-left: 20px; padding-right: 20px; }
       .grid { grid-template-columns: 1fr; }
-      .logo span { display: none; }
     }
   </style>
 </head>
@@ -469,6 +409,11 @@
   </div>
 
   <div class="filter-section">
+    <span class="filter-label">개발 방식</span>
+    <div class="chips" id="tierChips"></div>
+  </div>
+
+  <div class="filter-section">
     <span class="filter-label">카테고리</span>
     <div class="chips" id="chips"></div>
   </div>
@@ -480,28 +425,18 @@
 </main>
 
 <script>
-/* =====================================================
-   ✏️  여기에 앱 목록을 추가/수정하세요
-   type: "local"    → React/Vue 등 localhost 앱
-         "python"   → FastAPI / Flask 등 Python 서버
-         "html"     → 로컬 HTML 파일 (file:// 경로)
-         "external" → 외부 URL (GitHub Pages 등)
-
-   status: "live"     → 🟢 완성  (정상 운영 중)
-           "beta"     → 🟡 베타  (사용 가능, 일부 오류)
-           "building" → 🔵 개발중 (오류 많아 업데이트 중)
-           "draft"    → ⚪ 초안  (완전 초안, 미완성)
-           "idea"     → 💡 아이디어 (기획 단계)
-
-   detail: "..." → (선택) 모달에 표시할 추가 설명 (배경, 기대효과 등)
-   ===================================================== */
-
 const STATUS_MAP = {
-  live:     { label: "🟢 완성",     cls: "badge-live",     text: "완성"    },
-  beta:     { label: "🟡 베타",     cls: "badge-beta",     text: "베타"    },
-  building: { label: "🔵 개발중",   cls: "badge-building", text: "개발중"  },
-  draft:    { label: "⚪ 초안",     cls: "badge-draft",    text: "초안"    },
-  idea:     { label: "💡 아이디어", cls: "badge-idea",     text: "아이디어"},
+  live:     { label: "🟢 완성",     cls: "badge-live"     },
+  beta:     { label: "🟡 베타",     cls: "badge-beta"     },
+  building: { label: "🔵 개발중",   cls: "badge-building" },
+  draft:    { label: "⚪ 초안",     cls: "badge-draft"    },
+  idea:     { label: "💡 아이디어", cls: "badge-idea"     },
+};
+
+const TIER_MAP = {
+  1: { label: "🟦 T1 · 외부도입", short: "T1 외부도입", cls: "tier-1" },
+  2: { label: "🟨 T2 · Hybrid",   short: "T2 Hybrid",   cls: "tier-2" },
+  3: { label: "🟩 T3 · 자체개발", short: "T3 자체개발", cls: "tier-3" },
 };
 
 const APPS = [
@@ -514,6 +449,7 @@ const APPS = [
     color: "#6366f1",
     type: "external",
     status: "live",
+    tier: 3,
     category: "법규",
   },
   {
@@ -525,6 +461,7 @@ const APPS = [
     color: "#f59e0b",
     type: "external",
     status: "live",
+    tier: 3,
     category: "공모",
   },
   {
@@ -536,6 +473,7 @@ const APPS = [
     color: "#10b981",
     type: "external",
     status: "beta",
+    tier: 3,
     category: "도면",
   },
   {
@@ -547,68 +485,73 @@ const APPS = [
     color: "#6366f1",
     type: "external",
     status: "live",
+    tier: 2,
     category: "렌더",
   },
   {
-  name: "평면도 3D 시각화기",
-  desc: "2D 아파트 평면도 이미지 업로드 → Gemini로 구조 분석 → 아이소메트릭 3D 렌더링 자동 생성",
-  url: "https://floor-plan-3d-app-30350777436.asia-northeast3.run.app",
-  detail: "한국 아파트 2D 평면도 이미지를 업로드하면 Gemini 2.5 Pro가 벽·창·방 배치를 분석하여 이미지 생성 프롬프트를 작성하고, Gemini Flash Image 모델이 NW·NE·SW·SE 4방향 아이소메트릭 3D 렌더링을 생성한다. 실내는 모던 한국 아파트 스타일(원목 바닥·화이트 벽·가구 배치)로 자동 구성되며 결과 이미지를 PNG로 다운로드할 수 있다.",
-  icon: "🏠",
-  tags: ["평면도", "3D렌더링", "아이소메트릭", "Gemini Model", "건축시각화", "이미지생성", "유료"],
-  color: "#ea580c",
-  type: "external",
-  status: "beta",
-  ategory: "렌더"
+    name: "평면도 3D 시각화기",
+    desc: "2D 아파트 평면도 이미지 업로드 → Gemini로 구조 분석 → 아이소메트릭 3D 렌더링 자동 생성",
+    url: "https://floor-plan-3d-app-30350777436.asia-northeast3.run.app",
+    detail: "한국 아파트 2D 평면도 이미지를 업로드하면 Gemini 2.5 Pro가 벽·창·방 배치를 분석하여 이미지 생성 프롬프트를 작성하고, Gemini Flash Image 모델이 NW·NE·SW·SE 4방향 아이소메트릭 3D 렌더링을 생성한다. 실내는 모던 한국 아파트 스타일(원목 바닥·화이트 벽·가구 배치)로 자동 구성되며 결과 이미지를 PNG로 다운로드할 수 있다.",
+    icon: "🏠",
+    tags: ["평면도", "3D렌더링", "아이소메트릭", "Gemini Model", "건축시각화", "이미지생성", "유료"],
+    color: "#ea580c",
+    type: "external",
+    status: "beta",
+    tier: 2,
+    category: "렌더",
   },
-
-
-    // ─── S 티어 ───────────────────────────────────────────────────────────────
   {
     name: "대지 자동 파이프라인",
     desc: "주소 1개 → 토지이음·세움터·브이월드·KOSIS 자동 수집 → 법규 + 지역 통계 종합 리포트.",
     url: "---------",
-    detail: "주소 하나만 입력하면 토지이음(용도지역·법규), 세움터(건물대장), 브이월드(3D 맥락), KOSIS API(인구·가구·용도별 지역 통계)를 자동으로 수집해 종합 리포트를 출력한다. Claude가 건물 용도에 맞는 '지역 인문 요약문'도 함께 생성해 기획보고서에 바로 쓸 수 있다. 주거 프로젝트는 가구 구성, 의료시설은 고령 인구 비율 등 용도별 관점이 다르게 적용된다.",
+    detail: "주소 하나만 입력하면 토지이음(용도지역·법규), 세움터(건물대장), 브이월드(3D 맥락), KOSIS API(인구·가구·용도별 지역 통계)를 자동으로 수집해 종합 리포트를 출력한다. Claude가 건물 용도에 맞는 '지역 인문 요약문'도 함께 생성해 기획보고서에 바로 쓸 수 있다.",
     icon: "📍",
     tags: ["대지", "법규", "GIS", "KOSIS", "Claude", "FastAPI", "React", "유료", "담당자용"],
     color: "#0d9488",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "법규",
   },
   {
     name: "복합 건물 볼륨 최적화기",
     desc: "대지 조건 입력 → 건축 제약 자동 해결 → 최대 3D 볼륨 시각화 + DXF 출력.",
     url: "---------",
-    detail: "대지 주소와 계획 용도를 입력하면 건폐율·용적률·일조사선·이격거리 제약을 shapely로 자동 계산해 Three.js 3D 볼륨을 브라우저에서 시각화한다. SVG 캔버스에서 배치를 수동 수정하고 DXF로 AutoCAD에 직접 내보낼 수 있다. 랜드북·빌드잇이 대응 못 하는 비주거·복합 건물 영역에 특화되어 있다.",
+    detail: "대지 주소와 계획 용도를 입력하면 건폐율·용적률·일조사선·이격거리 제약을 shapely로 자동 계산해 Three.js 3D 볼륨을 브라우저에서 시각화한다. 랜드북·빌드잇이 대응 못 하는 비주거·복합 건물 영역에 특화되어 있다. ※ 매스 최적화 엔진은 TestFit/Forma 도입 권장 (T1), 한국 일조사선 보정 모듈만 자체 개발 예정.",
     icon: "🏢",
-    tags: ["볼륨", "법규", "3D", "DXF", "shapely", "Claude", "FastAPI", "유료", "담당자용"],
+    tags: ["볼륨", "법규", "3D", "DXF", "shapely", "FastAPI", "유료", "담당자용"],
     color: "#7c3aed",
     type: "external",
     status: "idea",
+    tier: 1,
+    category: "3D",
   },
   {
     name: "BIM 법규 준수 체커",
     desc: "IFC 파일 업로드 → 면적·높이·이격거리 위반 항목 자동 감지 + 수정 가이드.",
     url: "---------",
-    detail: "IFC 파일을 업로드하면 IfcOpenShell로 파싱해 각 공간의 면적·높이·이격거리·용도를 추출하고, Claude API로 한국 건축법 기준과 대조해 위반 항목을 자동으로 찾아내고 수정 가이드를 제시한다. 한국 건축법 특화가 차별점.",
+    detail: "IFC 파일을 업로드하면 IfcOpenShell로 파싱해 각 공간의 면적·높이·이격거리·용도를 추출하고, Claude API로 한국 건축법 기준과 대조해 위반 항목을 자동으로 찾아내고 수정 가이드를 제시한다.",
     icon: "🔍",
     tags: ["BIM", "IFC", "법규", "검토", "IfcOpenShell", "Claude", "유료", "담당자용"],
     color: "#2563eb",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "도면",
   },
-
-  // ─── A 티어 ───────────────────────────────────────────────────────────────
   {
     name: "주변 건물 3D 맥락 뷰어",
     desc: "주소 입력 → 브이월드 + NGII GIS 데이터 → 실제 지형·건물 3D 렌더링 + 3DM 출력.",
     url: "---------",
-    detail: "대지 주소를 입력하면 브이월드 API 3D 건물 데이터와 국토지리정보원 수치지형도를 결합해 CesiumJS로 주변 실제 맥락을 렌더링한다. geopandas/shapely로 지형 데이터를 처리하고 rhino3dm 포맷으로 내보내 Rhino에서 직접 열 수 있다.",
+    detail: "대지 주소를 입력하면 브이월드 API 3D 건물 데이터와 국토지리정보원 수치지형도를 결합해 CesiumJS로 주변 실제 맥락을 렌더링한다. rhino3dm 포맷으로 내보내 Rhino에서 직접 열 수 있다.",
     icon: "🌐",
     tags: ["3D", "GIS", "브이월드", "NGII", "rhino3dm", "CesiumJS", "유료", "담당자용"],
     color: "#0891b2",
     type: "external",
     status: "idea",
+    tier: 2,
+    category: "3D",
   },
   {
     name: "AI 시방서 자동 생성기",
@@ -620,17 +563,21 @@ const APPS = [
     color: "#db2777",
     type: "external",
     status: "idea",
+    tier: 2,
+    category: "문서",
   },
   {
     name: "음성 기록 자동화기",
     desc: "음성 업로드 또는 현장 실시간 녹음 → STT 변환 → 회의록 또는 업무 지시서 자동 생성",
     url: "---------",
-    detail: "회의 녹음 파일을 업로드하거나 현장에서 실시간으로 음성 메모를 입력하면 gpt-4o-mini-transcribe로 STT 변환하고, 모드에 따라 Claude가 회의록(안건·결정사항·액션아이템) 또는 업무 지시서(지시사항·확인항목·현장메모)로 자동 구조화한다. PWA로 현장 오프라인 녹음도 지원한다.",
+    detail: "회의 녹음 파일을 업로드하거나 현장에서 실시간으로 음성 메모를 입력하면 STT API로 변환하고, 모드에 따라 Claude가 회의록(안건·결정사항·액션아이템) 또는 업무 지시서(지시사항·확인항목·현장메모)로 자동 구조화한다. PWA로 현장 오프라인 녹음도 지원한다.",
     icon: "🎙️",
-    tags: ["STT", "회의록", "현장메모", "gpt-4o-transcribe", "Claude", "PWA", "유료", "담당자용"],
+    tags: ["STT", "회의록", "현장메모", "Claude", "PWA", "유료", "담당자용"],
     color: "#7c3aed",
     type: "external",
     status: "idea",
+    tier: 2,
+    category: "문서",
   },
   {
     name: "인허가 서류 자동화기",
@@ -642,6 +589,8 @@ const APPS = [
     color: "#ea580c",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "법규",
   },
   {
     name: "설계안 비교 AI 리포트",
@@ -653,6 +602,8 @@ const APPS = [
     color: "#7c3aed",
     type: "external",
     status: "idea",
+    tier: 2,
+    category: "문서",
   },
   {
     name: "도면 완성도 AI 체커",
@@ -664,10 +615,9 @@ const APPS = [
     color: "#0d9488",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "도면",
   },
-
-
-  // ─── B 티어 ───────────────────────────────────────────────────────────────
   {
     name: "VE 대안 비용 비교기",
     desc: "공법·마감재 대안별 단가 입력 → 비용 차이 자동 비교표 출력.",
@@ -678,6 +628,8 @@ const APPS = [
     color: "#db2777",
     type: "external",
     status: "idea",
+    tier: 2,
+    category: "문서",
   },
   {
     name: "제안서 AI 초안 생성기",
@@ -689,6 +641,8 @@ const APPS = [
     color: "#16a34a",
     type: "external",
     status: "idea",
+    tier: 2,
+    category: "공모",
   },
   {
     name: "포트폴리오 자동 정리기",
@@ -700,30 +654,34 @@ const APPS = [
     color: "#db2777",
     type: "external",
     status: "idea",
+    tier: 2,
+    category: "문서",
   },
   {
-    name: "레퍼런스 탐색기",
-    desc: "건축 사례 텍스트 검색 + 건물 사진 이미지 분석. 설계 초기 레퍼런스 수집·분석 통합.",
+    name: "레퍼런스 이미지 분석기",
+    desc: "건물 사진 업로드 → 건축 스타일·외피 재료·매스 구성 AI 분석. 설계 초기 레퍼런스 탐색용.",
     url: "---------",
-    detail: "프로젝트 유형·키워드로 국내외 건축 사례를 텍스트로 검색하거나, 건물 사진을 업로드해 건축 스타일·외피 재료·매스 구성을 이미지로 분석한다. 두 기능을 하나의 앱에서 탭으로 전환하며 사용해 설계 초기 레퍼런스 수집과 분석을 한 곳에서 처리한다.",
+    detail: "건물 사진을 업로드하면 Vision AI가 건축 스타일·외피 재료·매스 구성을 분석한다. (v1에서 텍스트 검색 기능은 Perplexity 등 외부 도구로 대체 권장 후 분리됨)",
     icon: "🔭",
-    tags: ["레퍼런스", "이미지분석", "GPT-4o Vision", "Claude", "FastAPI", "유료", "담당자용"],
+    tags: ["레퍼런스", "이미지분석", "Vision AI", "Claude", "FastAPI", "유료", "담당자용"],
     color: "#0891b2",
     type: "external",
     status: "idea",
+    tier: 2,
+    category: "렌더",
   },
-
-  // ─── 문서 자동화 ───────────────────────────────────────────────────────────
   {
     name: "과업지시서 분석기",
     desc: "과업지시서·공모지침서 PDF → 대지·면적·심사기준·제출요건 자동 파싱.",
     url: "---------",
-    detail: "수백 페이지짜리 과업지시서나 공모지침서 PDF를 업로드하면 Claude가 대지 조건·면적 프로그램·설계 기준·심사 기준·제출 요건을 자동으로 파싱해 구조화된 요약 리포트를 출력한다. competition-analyzer의 PDF 파싱 패턴을 베이스로 재활용한다.",
+    detail: "수백 페이지짜리 과업지시서나 공모지침서 PDF를 업로드하면 Claude가 대지 조건·면적 프로그램·설계 기준·심사 기준·제출 요건을 자동으로 파싱해 구조화된 요약 리포트를 출력한다.",
     icon: "📖",
     tags: ["문서", "분석", "Claude", "PDF", "FastAPI", "React", "유료", "담당자용"],
     color: "#0d9488",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "공모",
   },
   {
     name: "설계 계약서 검토기",
@@ -735,6 +693,8 @@ const APPS = [
     color: "#7c3aed",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "문서",
   },
   {
     name: "사내 문서 RAG 검색기",
@@ -746,6 +706,8 @@ const APPS = [
     color: "#ea580c",
     type: "external",
     status: "idea",
+    tier: 2,
+    category: "문서",
   },
   {
     name: "대관 공문 자동 작성기",
@@ -757,131 +719,151 @@ const APPS = [
     color: "#16a34a",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "문서",
   },
   {
     name: "건원 브랜드 PPT 생성기",
     desc: "내용 입력 + 용도 선택 → 건원 CI 적용 표준 PPT 자동 생성.",
     url: "---------",
-    detail: "내용을 입력하면 건원 CI(RED #e60012)가 적용된 표준 PPT를 자동으로 만들어준다. 제안서·설계설명서·클라이언트 현황 보고서·사내 발표용 템플릿 중 선택하면 슬라이드 레이아웃이 자동으로 달라진다. 클라이언트 보고서 용도 포함.",
+    detail: "내용을 입력하면 건원 CI(RED #e60012)가 적용된 표준 PPT를 자동으로 만들어준다. 제안서·설계설명서·클라이언트 현황 보고서·사내 발표용 템플릿 중 선택하면 슬라이드 레이아웃이 자동으로 달라진다.",
     icon: "🎯",
     tags: ["PPT", "문서", "Claude", "python-pptx", "FastAPI", "유료", "담당자용"],
     color: "#d97706",
     type: "external",
     status: "idea",
+    tier: 2,
+    category: "문서",
   },
-
-  // ─── 신규 추가 ───────────────────────────────────────────────────────────────
   {
     name: "KOSIS 지역 통계 분석기",
-    desc: "주소 입력 → KOSIS 196개 통계항목 자동 수집 → 건물 용도별 맞춤 지역 분석 리포트.",
+    desc: "주소 입력 → KOSIS API 통계 자동 수집 → 건물 용도별 맞춤 지역 분석 리포트.",
     url: "---------",
-    detail: "주소를 입력하면 KOSIS API로 해당 시·군·구의 인구·가구 구성·용도별 건물 통계 데이터를 자동으로 수집하고, Claude가 건물 용도(주거/상업/의료/교육/문화)에 맞는 '지역 인문 요약문'을 생성한다. 주거는 가구 구성, 의료시설은 고령 인구 비율처럼 건물 용도에 맞게 강조 포인트가 달라진다.",
+    detail: "주소를 입력하면 KOSIS API로 해당 시·군·구의 인구·가구 구성·용도별 건물 통계 데이터를 자동으로 수집하고, Claude가 건물 용도(주거/상업/의료/교육/문화)에 맞는 '지역 인문 요약문'을 생성한다.",
     icon: "📈",
     tags: ["통계", "분석", "KOSIS", "Claude", "FastAPI", "React", "유료", "담당자용"],
     color: "#0891b2",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "법규",
   },
   {
     name: "AI 평면 배치 생성기",
-    desc: "공간 프로그램 + 대지 조건 입력 → Claude AI가 건축 제약 내 평면 초안 생성 → SVG 편집 + DXF 출력.",
+    desc: "공간 프로그램 + 대지 조건 입력 → AI 평면 초안 생성 → SVG 편집 + DXF 출력.",
     url: "---------",
-    detail: "요구 면적 프로그램(실 목록·면적)과 대지 조건을 입력하면 Claude AI가 건폐율·용적률·이격거리 제약을 자동으로 적용하면서 평면 배치 초안을 생성한다. 브라우저 SVG 캔버스에서 건축사가 직접 수정하고 DXF로 AutoCAD에 내보낼 수 있다. AI가 초안을 제안하고 건축사가 판단·수정하는 구조로, 설계 의사결정권은 항상 건축사에게 있다.",
+    detail: "요구 면적 프로그램(실 목록·면적)과 대지 조건을 입력하면 AI가 평면 배치 초안을 생성한다. ※ Finch 3D / Snaptrude 등 전용 플랫폼 라이선스 도입 검토 중 (T1). 브라우저 SVG 캔버스에서 건축사가 직접 수정하고 DXF로 내보낼 수 있다.",
     icon: "🏗️",
-    tags: ["평면", "배치", "Claude", "SVG", "DXF", "FastAPI", "React", "유료", "담당자용"],
+    tags: ["평면", "배치", "SVG", "DXF", "FastAPI", "React", "유료", "담당자용"],
     color: "#d97706",
     type: "external",
     status: "idea",
+    tier: 1,
+    category: "도면",
   },
   {
     name: "사내 업무 가이드봇",
     desc: "업무 카테고리 선택 → AI가 건원 내부 절차·서식·주의사항 대화형 안내.",
     url: "---------",
-    detail: "신입부터 시니어까지 건원 내부 업무 절차를 AI가 단계별로 대화형으로 안내한다. 인허가 신청 순서·도면 납품 체크리스트·공모 제출 절차·보고서 작성 기준 등을 물어보면 실제 사내 기준에 맞는 가이드를 받을 수 있다. 신입 온보딩 시간을 줄이고 사내 업무 지식을 표준화하는 것이 목적이다.",
+    detail: "신입부터 시니어까지 건원 내부 업무 절차를 AI가 단계별로 대화형으로 안내한다. 인허가 신청 순서·도면 납품 체크리스트·공모 제출 절차·보고서 작성 기준 등을 물어보면 실제 사내 기준에 맞는 가이드를 받을 수 있다.",
     icon: "🤖",
     tags: ["챗봇", "가이드", "Claude", "PWA", "FastAPI", "유료", "담당자용"],
     color: "#db2777",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "관리",
   },
-
-  // ─── 멀티모달 API 신규 추가 ────────────────────────────────────────────────
   {
     name: "현장 하자 사진 분류기",
-    desc: "현장 사진 업로드 → GPT-4o Vision이 균열·누수·결로·박리 하자 유형 자동 분류 → 하자 리포트 생성",
+    desc: "현장 사진 업로드 → Vision AI가 균열·누수·결로·박리 하자 유형 자동 분류 → 하자 리포트 생성",
     url: "---------",
-    detail: "현장에서 찍은 사진을 업로드하면 GPT-4o Vision이 균열·누수·결로·박리·들뜸 등 하자 유형을 자동으로 분류하고 위치·심각도를 분석한다. Claude가 하자 내용을 하자보수청구서 형식으로 정리해 Word로 출력한다. 감리·준공 단계에서 현장 하자 기록 업무를 대폭 줄인다.",
+    detail: "현장에서 찍은 사진을 업로드하면 Vision AI가 균열·누수·결로·박리·들뜸 등 하자 유형을 자동으로 분류하고 위치·심각도를 분석한다. Claude가 하자보수청구서 형식으로 정리해 Word로 출력한다.",
     icon: "🔬",
-    tags: ["하자", "현장", "GPT-4o Vision", "Claude", "FastAPI", "유료", "담당자용"],
+    tags: ["하자", "현장", "Vision AI", "Claude", "FastAPI", "유료", "담당자용"],
     color: "#ea580c",
     type: "external",
     status: "idea",
+    tier: 2,
+    category: "관리",
   },
   {
     name: "발표 자료 자동 내레이션",
-    desc: "PPT 슬라이드 텍스트 → Claude 발표 문체 정리 → ElevenLabs 한국어 음성 MP3 자동 생성",
+    desc: "PPT 슬라이드 텍스트 → Claude 발표 문체 정리 → AI 한국어 음성 MP3 자동 생성",
     url: "---------",
-    detail: "PowerPoint 파일을 업로드하면 슬라이드별 텍스트를 추출하고, Claude가 자연스러운 발표 문체로 다듬은 뒤 ElevenLabs Eleven v3로 한국어 음성 MP3를 자동 생성한다. 슬라이드별 개별 파일과 전체 합본 파일을 ZIP으로 다운로드할 수 있다. 발주처 설명회·온라인 발표 준비 시간을 줄인다.",
+    detail: "PowerPoint 파일을 업로드하면 슬라이드별 텍스트를 추출하고, Claude가 자연스러운 발표 문체로 다듬은 뒤 TTS API로 한국어 음성 MP3를 자동 생성한다. 슬라이드별 개별 파일과 전체 합본 파일을 ZIP으로 다운로드할 수 있다.",
     icon: "🎧",
-    tags: ["내레이션", "TTS", "ElevenLabs", "Claude", "FastAPI", "유료", "담당자용"],
+    tags: ["내레이션", "TTS", "Claude", "FastAPI", "유료", "담당자용"],
     color: "#db2777",
     type: "external",
     status: "idea",
+    tier: 2,
+    category: "문서",
   },
   {
     name: "건축 도면·문서 번역기",
     desc: "외국어 PDF·Word 업로드 → DeepL로 서식 유지 번역 → Claude로 건축 전문 용어 후처리",
     url: "---------",
-    detail: "일본어·영어·중국어 건축 도면 캡션·시방서·기술 문서를 업로드하면 DeepL API가 서식을 유지하면서 한국어로 번역하고, Claude가 건축 전문 용어를 한국 실무 기준에 맞게 후처리한다. 해외 협력사 도면, 외국 레퍼런스 자료, 국제 공모 서류에 활용한다.",
+    detail: "일본어·영어·중국어 건축 도면 캡션·시방서·기술 문서를 업로드하면 DeepL API가 서식을 유지하면서 한국어로 번역하고, Claude가 건축 전문 용어를 한국 실무 기준에 맞게 후처리한다.",
     icon: "🌏",
     tags: ["번역", "다국어", "DeepL", "Claude", "FastAPI", "유료", "담당자용"],
     color: "#0891b2",
     type: "external",
     status: "idea",
+    tier: 2,
+    category: "문서",
   },
   {
     name: "투시도 스타일 변환기",
     desc: "3D 렌더 이미지 → 수채화·연필 스케치·포토리얼·다이어그램 등 다양한 표현 스타일로 변환",
     url: "---------",
-    detail: "3D 모델 렌더링 이미지를 업로드하면 Imagen 4.0 또는 GPT Image 1.5로 수채화·연필 스케치·포토리얼·콘셉트 다이어그램·야경 등 다양한 표현 스타일로 변환한다. 기존 스케치 렌더링 앱이 스케치→포토리얼 방향이라면, 이 앱은 렌더→다양한 스타일 변환으로 방향이 반대다.",
+    detail: "3D 모델 렌더링 이미지를 업로드하면 이미지 생성 AI API로 수채화·연필 스케치·포토리얼·콘셉트 다이어그램·야경 등 다양한 표현 스타일로 변환한다. 기존 스케치 렌더링 앱이 스케치→포토리얼 방향이라면, 이 앱은 렌더→다양한 스타일 변환으로 방향이 반대다.",
     icon: "🎨",
-    tags: ["렌더링", "스타일변환", "Imagen4.0", "GPT Image 1.5", "FastAPI", "유료", "담당자용"],
+    tags: ["렌더링", "스타일변환", "이미지생성 AI", "FastAPI", "유료", "담당자용"],
     color: "#d97706",
     type: "external",
     status: "idea",
+    tier: 2,
+    category: "렌더",
   },
   {
     name: "건물 3D 투어 영상 생성기",
-    desc: "외관 렌더링 이미지 → Veo 3.1로 건물 주변 투어 영상 자동 생성. 클라이언트 발표용.",
+    desc: "외관 렌더링 이미지 → 영상 생성 AI로 건물 주변 투어 영상 자동 생성. 클라이언트 발표용.",
     url: "---------",
-    detail: "외관 렌더링 이미지를 업로드하면 Google Veo 3.1이 건물 주변을 걷는 듯한 투어 영상을 자동으로 생성한다. 클라이언트 발표·공모 제출 영상에 활용할 수 있다. 현재 Veo 3.1은 preview 단계로 API 안정성을 확인하면서 도입하는 것을 권장한다.",
+    detail: "외관 렌더링 이미지를 업로드하면 영상 생성 AI API가 건물 주변을 걷는 듯한 투어 영상을 자동으로 생성한다. 클라이언트 발표·공모 제출 영상에 활용할 수 있다. ※ 영상 생성 API 안정성 확인 후 도입 결정.",
     icon: "🎬",
-    tags: ["영상생성", "Veo3.1", "클라이언트발표", "FastAPI", "유료", "담당자용"],
+    tags: ["영상생성", "클라이언트발표", "FastAPI", "유료", "담당자용"],
     color: "#4f46e5",
     type: "external",
     status: "idea",
+    tier: 2,
+    category: "렌더",
   },
   {
     name: "건폐율·용적률 계산기",
     desc: "주소 입력 → 토지이음 API로 용도지역 자동 조회 → 법정 건폐율·용적률 한도 즉시 계산.",
     url: "---------",
-    detail: "주소를 입력하면 토지이음 API(무료)로 용도지역을 자동 조회하고, 대지 면적·건물 용도를 입력하면 법정 건폐율·용적률 한도와 최대 건축면적·연면적을 즉시 계산해 표시한다. 지자체 조례 수동 보정도 가능하다.",
+    detail: "주소를 입력하면 토지이음 API로 용도지역을 자동 조회하고, 대지 면적·건물 용도를 입력하면 법정 건폐율·용적률 한도와 최대 건축면적·연면적을 즉시 계산해 표시한다. 지자체 조례 수동 보정도 가능하다.",
     icon: "🧮",
     tags: ["법규", "면적", "토지이음", "Python", "React", "무료", "담당자용"],
     color: "#16a34a",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "법규",
   },
   {
     name: "일조 분석 + 건물 높이 최적화기",
     desc: "기상청 실측 데이터 + 건물 좌표 → 일조 침해 시각화 + 법규 만족 최적 건물 높이 도출.",
     url: "---------",
-    detail: "기상청 API의 실측 일사량 데이터와 건물 좌표를 결합해 시간대별 일조 침해 여부를 Three.js로 시각화하고, 건축법 86조를 만족하면서 연면적을 최대화하는 최적 건물 높이를 자동으로 도출한다. 단순 침해 여부 확인에서 나아가 연면적을 최대화하는 건물 높이를 자동으로 도출하는 것이 차별점이다.",
+    detail: "기상청 API의 실측 일사량 데이터와 건물 좌표를 결합해 시간대별 일조 침해 여부를 Three.js로 시각화하고, 건축법 86조를 만족하면서 연면적을 최대화하는 최적 건물 높이를 자동으로 도출한다.",
     icon: "☀️",
     tags: ["일조", "채광", "최적높이", "기상청API", "pysolar", "Three.js", "무료", "담당자용"],
     color: "#d97706",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "법규",
   },
   {
     name: "설계 변경 이력 비교기",
@@ -893,6 +875,8 @@ const APPS = [
     color: "#2563eb",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "도면",
   },
   {
     name: "BIM 면적 자동 추출기",
@@ -904,6 +888,8 @@ const APPS = [
     color: "#16a34a",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "도면",
   },
   {
     name: "주차 배치 자동 계획기",
@@ -911,10 +897,12 @@ const APPS = [
     url: "---------",
     detail: "대지 면적·건물 용도·규모를 입력하면 주차장법 기준 법정 주차 대수를 자동 계산하고, 주차 구획 치수·진입로·회전 반경 기준을 적용해 SVG 배치 도식을 생성한다.",
     icon: "🅿️",
-    tags: ["주차", "법규", "배치", "shapely", "Claude", "FastAPI", "무료", "담당자용"],
+    tags: ["주차", "법규", "배치", "shapely", "FastAPI", "무료", "담당자용"],
     color: "#d97706",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "법규",
   },
   {
     name: "창호·문 일람표 추출기",
@@ -926,6 +914,8 @@ const APPS = [
     color: "#0891b2",
     type: "external",
     status: "draft",
+    tier: 3,
+    category: "도면",
   },
   {
     name: "타이틀블록 일괄 업데이트",
@@ -933,10 +923,12 @@ const APPS = [
     url: "---------",
     detail: "여러 DWG 파일의 타이틀블록 속성(프로젝트명·도면번호·날짜·담당자)을 한 번에 일괄 수정하고 수정된 DWG 파일을 ZIP으로 다운로드할 수 있다.",
     icon: "🏷️",
-    tags: ["도면", "CAD", "LISP", "ezdxf", "Python", "무료", "담당자용"],
+    tags: ["도면", "CAD", "ezdxf", "Python", "무료", "담당자용"],
     color: "#4f46e5",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "도면",
   },
   {
     name: "마감재 일람표 정리기",
@@ -948,6 +940,8 @@ const APPS = [
     color: "#ea580c",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "도면",
   },
   {
     name: "도면 출력 설정 검증기",
@@ -959,17 +953,21 @@ const APPS = [
     color: "#16a34a",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "도면",
   },
   {
     name: "건축법규 탐색기",
     desc: "자연어 법조문 검색 + 프로젝트 조건 기반 인허가 체크리스트 생성. 법제처 API 실시간 연동.",
     url: "---------",
-    detail: "자연어로 건축법 조항을 검색하거나 프로젝트 조건을 입력해 인허가 제출용 체크리스트 문서를 자동 생성한다. 법제처 DRF API로 실시간 법조문 원문을 조회해 일반 지식 기반이 아닌 원문 기반 결과를 제공한다. 조문 검색 탭 + 체크리스트 생성 탭으로 구성된다. 건축 법규 자동 진단 앱이 판정 도구라면 이 앱은 법조문 탐색과 인허가 문서화 도구다.",
+    detail: "자연어로 건축법 조항을 검색하거나 프로젝트 조건을 입력해 인허가 제출용 체크리스트 문서를 자동 생성한다. 법제처 DRF API로 실시간 법조문 원문을 조회해 원문 기반 결과를 제공한다.",
     icon: "⚖️",
     tags: ["법규", "검색", "체크리스트", "법제처API", "SQLite", "FastAPI", "무료", "전직급"],
     color: "#4f46e5",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "법규",
   },
   {
     name: "면적 산정 자동화기",
@@ -981,6 +979,8 @@ const APPS = [
     color: "#0d9488",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "도면",
   },
   {
     name: "협력사 업무 관리",
@@ -992,6 +992,8 @@ const APPS = [
     color: "#2563eb",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "관리",
   },
   {
     name: "설계 공정표 자동 생성",
@@ -1003,6 +1005,8 @@ const APPS = [
     color: "#d97706",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "관리",
   },
   {
     name: "수주 파이프라인 CRM",
@@ -1014,6 +1018,8 @@ const APPS = [
     color: "#4f46e5",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "관리",
   },
   {
     name: "공모전 정보 자동 수집기",
@@ -1025,6 +1031,8 @@ const APPS = [
     color: "#0891b2",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "공모",
   },
   {
     name: "다중 프로젝트 대시보드",
@@ -1036,6 +1044,8 @@ const APPS = [
     color: "#7c3aed",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "관리",
   },
   {
     name: "인력 배치 최적화 도구",
@@ -1047,17 +1057,21 @@ const APPS = [
     color: "#0d9488",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "관리",
   },
   {
     name: "GIS → 3D 대지 모델 생성기",
     desc: "국토지리정보원 수치지형도 ZIP → 지형·건물·도로 3D 대지 모델 + Rhino 3DM 출력.",
     url: "---------",
-    detail: "국토지리정보원(NGII)에서 다운받은 수치지형도 ZIP 파일을 업로드하면 geopandas/shapely로 지형·건물·도로·경계를 파싱하고 rhino3dm으로 3D 대지 모델을 자동 생성한다. Rhino에서 바로 열 수 있는 .3dm 파일과 법적 이격거리 표면이 함께 출력된다. 브이월드 3D 뷰어가 온라인 실시간 데이터 기반이라면, 이 앱은 오프라인 GIS 파일을 직접 처리하는 방식이다.",
+    detail: "국토지리정보원(NGII)에서 다운받은 수치지형도 ZIP 파일을 업로드하면 geopandas/shapely로 지형·건물·도로·경계를 파싱하고 rhino3dm으로 3D 대지 모델을 자동 생성한다. Rhino에서 바로 열 수 있는 .3dm 파일과 법적 이격거리 표면이 함께 출력된다.",
     icon: "🗺️",
     tags: ["GIS", "3D", "대지", "NGII", "rhino3dm", "geopandas", "무료", "담당자용"],
     color: "#16a34a",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "3D",
   },
   {
     name: "DXF 도면 자동 생성기",
@@ -1069,22 +1083,26 @@ const APPS = [
     color: "#7c3aed",
     type: "external",
     status: "idea",
+    tier: 3,
+    category: "도면",
   },
 ];
-/* ===================================================== */
 
+/* ── State ── */
 let activeCategory = "전체";
 let activeStatus   = "전체";
+let activeTier     = "전체";
 
+/* ── Constants ── */
 const CATEGORIES = [
-  { key: "전체", label: "전체"         },
-  { key: "법규", label: "법규/인허가"  },
-  { key: "도면", label: "도면·BIM"     },
-  { key: "3D",   label: "3D 모델링"    },
-  { key: "렌더", label: "이미지·렌더링"},
-  { key: "문서", label: "AI 문서"      },
-  { key: "관리", label: "프로젝트 관리"},
-  { key: "공모", label: "공모/제안"    },
+  { key: "전체", label: "전체"          },
+  { key: "법규", label: "법규/인허가"   },
+  { key: "도면", label: "도면·BIM"      },
+  { key: "3D",   label: "3D 모델링"     },
+  { key: "렌더", label: "이미지·렌더링" },
+  { key: "문서", label: "AI 문서"       },
+  { key: "관리", label: "프로젝트 관리" },
+  { key: "공모", label: "공모/제안"     },
 ];
 
 const allStatuses = [
@@ -1092,18 +1110,27 @@ const allStatuses = [
   ...Object.entries(STATUS_MAP).map(([key, v]) => ({ key, label: v.label })),
 ];
 
+const allTiers = [
+  { key: "전체", label: "전체" },
+  { key: 1, label: "🟦 T1 · 외부도입" },
+  { key: 2, label: "🟨 T2 · Hybrid" },
+  { key: 3, label: "🟩 T3 · 자체개발" },
+];
+
 const STATUS_ORDER = ["live", "beta", "building", "draft", "idea"];
 
+/* ── Filter ── */
 function filtered() {
   const q = document.getElementById("searchInput").value.toLowerCase().trim();
   return APPS.filter(a => {
     const catOk    = activeCategory === "전체" || a.category === activeCategory;
-    const statusOk = activeStatus === "전체" || a.status === activeStatus;
+    const statusOk = activeStatus   === "전체" || a.status   === activeStatus;
+    const tierOk   = activeTier     === "전체" || a.tier     === activeTier;
     const qOk      = !q ||
       a.name.toLowerCase().includes(q) ||
       a.desc.toLowerCase().includes(q) ||
       a.tags.some(t => t.toLowerCase().includes(q));
-    return catOk && statusOk && qOk;
+    return catOk && statusOk && tierOk && qOk;
   }).sort((a, b) => {
     const si = STATUS_ORDER.indexOf(a.status) - STATUS_ORDER.indexOf(b.status);
     if (si !== 0) return si;
@@ -1111,41 +1138,42 @@ function filtered() {
   });
 }
 
+/* ── Chips ── */
 function renderChips() {
-  // Status chips
   document.getElementById("statusChips").innerHTML = allStatuses.map(s => `
     <button class="chip ${s.key === activeStatus ? 'on' : ''}"
       data-status="${s.key}"
       onclick="setStatus('${s.key}')">${s.label}</button>
   `).join('');
 
-  // Category chips
+  document.getElementById("tierChips").innerHTML = allTiers.map(t => `
+    <button class="chip ${t.key === activeTier ? 'on' : ''}"
+      data-tier="${t.key}"
+      onclick="setTier(${JSON.stringify(t.key)})">${t.label}</button>
+  `).join('');
+
   document.getElementById("chips").innerHTML = CATEGORIES.map(c => `
-    <button class="chip ${c.key === activeCategory ? 'on' : ''}" onclick="setCategory('${c.key}')">${c.label}</button>
+    <button class="chip ${c.key === activeCategory ? 'on' : ''}"
+      onclick="setCategory('${c.key}')">${c.label}</button>
   `).join('');
 }
 
-function setCategory(c) {
-  activeCategory = c;
-  renderChips();
-  render();
-}
+function setCategory(c) { activeCategory = c; renderChips(); render(); }
+function setStatus(s)   { activeStatus   = s; renderChips(); render(); }
+function setTier(t)     { activeTier     = t; renderChips(); render(); }
 
-function setStatus(s) {
-  activeStatus = s;
-  renderChips();
-  render();
-}
-
+/* ── Render ── */
 function render() {
   const list = filtered();
   const grid = document.getElementById("grid");
 
-  // Count label shows status breakdown
   const totalShown = list.length;
   const liveCount  = APPS.filter(a => a.status === "live").length;
+  const t1 = APPS.filter(a => a.tier === 1).length;
+  const t2 = APPS.filter(a => a.tier === 2).length;
+  const t3 = APPS.filter(a => a.tier === 3).length;
   document.getElementById("countLabel").textContent =
-    `${totalShown}개 표시 중 · 전체 ${APPS.length}개 (운영 중 ${liveCount}개)`;
+    `${totalShown}개 표시 중 · 전체 ${APPS.length}개 (운영 중 ${liveCount}개) · T1:${t1} T2:${t2} T3:${t3}`;
 
   if (!list.length) {
     grid.innerHTML = `<div class="empty">🔭 검색 결과가 없습니다</div>`;
@@ -1156,40 +1184,37 @@ function render() {
     const idx     = APPS.indexOf(app);
     const hasUrl  = app.url && app.url !== "---------";
     const st      = STATUS_MAP[app.status] || STATUS_MAP.idea;
-    const tag     = `<span class="status-badge ${st.cls}">${st.label}</span>`;
-    if (hasUrl) {
-      return `
-      <a class="card" href="${app.url}" target="_blank" rel="noopener noreferrer"
-         style="--c:${app.color}" id="card-${idx}">
-        <div class="card-top">
-          <div class="icon-box">${app.icon}</div>
-          ${tag}
-        </div>
-        <div class="card-title">${app.name}</div>
-        <div class="card-desc">${app.desc}</div>
-        <div class="card-foot">
-          <div class="tags">${app.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-          <span class="arrow">↗</span>
-        </div>
-      </a>`;
-    } else {
-      return `
-      <div class="card no-url" style="--c:${app.color}" id="card-${idx}" onclick="openModal(${idx})">
-        <div class="card-top">
-          <div class="icon-box">${app.icon}</div>
-          ${tag}
-        </div>
-        <div class="card-title">${app.name}</div>
-        <div class="card-desc">${app.desc}</div>
-        <div class="card-foot">
-          <div class="tags">${app.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-          <span class="arrow" style="font-size:15px;opacity:0.4">→</span>
-        </div>
+    const tm      = TIER_MAP[app.tier]  || TIER_MAP[3];
+
+    const badges = `
+      <div class="card-badges">
+        <span class="tier-badge ${tm.cls}">${tm.short}</span>
+        <span class="status-badge ${st.cls}">${st.label}</span>
       </div>`;
+
+    const body = `
+        <div class="card-top">
+          <div class="icon-box">${app.icon}</div>
+          ${badges}
+        </div>
+        <div class="card-title">${app.name}</div>
+        <div class="card-desc">${app.desc}</div>
+        <div class="card-foot">
+          <div class="tags">${app.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+          <span class="arrow">${hasUrl ? '↗' : '→'}</span>
+        </div>`;
+
+    if (hasUrl) {
+      return `<a class="card" href="${app.url}" target="_blank" rel="noopener noreferrer"
+         style="--c:${app.color}" id="card-${idx}">${body}</a>`;
+    } else {
+      return `<div class="card no-url" style="--c:${app.color}" id="card-${idx}"
+         onclick="openModal(${idx})">${body}</div>`;
     }
   }).join('');
 }
 
+/* ── Theme ── */
 function toggleTheme() {
   const html = document.documentElement;
   const dark = html.getAttribute("data-theme") === "dark";
@@ -1206,19 +1231,25 @@ const STATUS_NOTES = {
   idea:     "기획 단계의 아이디어입니다. 우선순위가 확정되면 개발을 시작할 예정입니다.",
 };
 
+const TIER_NOTES = {
+  1: "🟦 T1 외부도입 — 전용 플랫폼(TestFit, Finch 3D 등) 라이선스 도입을 검토 중입니다. 직접 개발보다 합리적인 영역으로 분류됩니다.",
+  2: "🟨 T2 Hybrid — 글로벌 AI API(Claude, Gemini, Vision, DeepL 등)를 백엔드로 활용하고, 한국 컨텍스트·사내 양식을 입혀 개발합니다.",
+  3: "🟩 T3 자체개발 — 한국 법규·GIS·사내 자산 특화 영역. 외부 도구 진입이 어려워 완전 자체 개발이 합리적입니다.",
+};
+
 function openModal(idx) {
   const app = APPS[idx];
   const st  = STATUS_MAP[app.status] || STATUS_MAP.idea;
+  const tm  = TIER_MAP[app.tier]  || TIER_MAP[3];
 
   const iconEl = document.getElementById("modalIcon");
   iconEl.textContent = app.icon;
   iconEl.style.background = `linear-gradient(135deg, ${app.color}, color-mix(in srgb, ${app.color} 70%, white))`;
 
   document.getElementById("modalTitle").textContent = app.name;
-
-  const badge = document.getElementById("modalBadge");
-  badge.textContent = st.label;
-  badge.className = `status-badge ${st.cls}`;
+  document.getElementById("modalBadges").innerHTML = `
+    <span class="tier-badge ${tm.cls}">${tm.label}</span>
+    <span class="status-badge ${st.cls}">${st.label}</span>`;
 
   document.getElementById("modalDesc").textContent = app.desc;
 
@@ -1233,8 +1264,9 @@ function openModal(idx) {
   document.getElementById("modalTags").innerHTML =
     app.tags.map(t => `<span class="modal-tag">${t}</span>`).join('');
 
-  document.getElementById("modalStatusNote").textContent =
-    STATUS_NOTES[app.status] || "";
+  document.getElementById("modalStatusNote").innerHTML =
+    `<div style="margin-bottom:8px">${STATUS_NOTES[app.status] || ""}</div>
+     <div style="font-size:12px;opacity:0.85">${TIER_NOTES[app.tier] || ""}</div>`;
 
   document.getElementById("modalOverlay").classList.add("open");
   document.body.style.overflow = "hidden";
@@ -1259,7 +1291,7 @@ render();
       <div class="modal-icon" id="modalIcon"></div>
       <div class="modal-title-wrap">
         <div class="modal-title" id="modalTitle"></div>
-        <span id="modalBadge" class="status-badge"></span>
+        <div class="modal-badges" id="modalBadges"></div>
       </div>
     </div>
     <div class="modal-divider"></div>
