@@ -6,6 +6,8 @@
 
 - **제작자**: 설계사업6본부1소 김정현 (junghyun@kunwon.com)
 - **배포**: GitHub Pages (`https://github.com/DaDaDiRaRa/kw-ai-hub`)
+- **운영·전략 문서**: `kunwon-ops` (private) — 앱별 벤치마킹, 정리 계획, 접기 판단 기준.
+  이 레포는 Pages 배포 때문에 Public 이라 그런 문서를 둘 수 없다
 - **아키텍처**: 단일 정적 HTML 파일 (`index.html`) — 빌드 도구, 패키지 매니저, 프레임워크 없음
 
 ---
