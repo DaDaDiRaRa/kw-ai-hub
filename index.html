@@ -186,6 +186,10 @@
     .badge-draft    { background: rgba(148,163,184,0.15);color: #64748b; border: 1px solid rgba(148,163,184,0.35); }
     [data-theme="dark"] .badge-draft { color: #94a3b8; }
     .badge-idea     { background: rgba(168,85,247,0.15); color: #a855f7; border: 1px solid rgba(168,85,247,0.35); }
+    .badge-deprecated { background: rgba(100,116,139,0.15); color: #64748b; border: 1px solid rgba(100,116,139,0.35); }
+    [data-theme="dark"] .badge-deprecated { color: #94a3b8; }
+    .card.is-deprecated { opacity: 0.5; }
+    .card.is-deprecated:hover { opacity: 0.75; }
 
     /* ── Tier Badge ── */
     .tier-badge {
@@ -426,11 +430,12 @@
 
 <script>
 const STATUS_MAP = {
-  live:     { label: "🟢 완성",     cls: "badge-live"     },
-  beta:     { label: "🟡 베타",     cls: "badge-beta"     },
-  building: { label: "🔵 개발중",   cls: "badge-building" },
-  draft:    { label: "⚪ 초안",     cls: "badge-draft"    },
-  idea:     { label: "💡 아이디어", cls: "badge-idea"     },
+  live:       { label: "🟢 완성",     cls: "badge-live"     },
+  beta:       { label: "🟡 베타",     cls: "badge-beta"     },
+  building:   { label: "🔵 개발중",   cls: "badge-building" },
+  draft:      { label: "⚪ 초안",     cls: "badge-draft"    },
+  idea:       { label: "💡 아이디어", cls: "badge-idea"     },
+  deprecated: { label: "⚫ 접음",     cls: "badge-deprecated" },
 };
 
 const TIER_MAP = {
@@ -724,14 +729,14 @@ const APPS = [
   },
   {
     name: "건원 브랜드 PPT 생성기",
-    desc: "내용 입력 + 용도 선택 → 건원 CI 적용 표준 PPT 자동 생성.",
+    desc: "내용 입력 + 용도 선택 → 건원 CI 적용 표준 PPT 자동 생성. → 터읽기 /deck/full 로 흡수됨.",
     url: "---------",
-    detail: "내용을 입력하면 건원 CI(RED #e60012)가 적용된 표준 PPT를 자동으로 만들어준다. 제안서·설계설명서·클라이언트 현황 보고서·사내 발표용 템플릿 중 선택하면 슬라이드 레이아웃이 자동으로 달라진다.",
+    detail: "원래 deck-builder 라는 별도 앱이었으나, 터읽기(대지 인문·생활맥락 종합분석)에 기능이 통째로 흡수됐다(POST /deck/full). 터읽기 쪽 사본이 더 최신이고 실제 운영 중이며, deck-builder 원본 저장소는 더 이상 갱신되지 않는다. PPT 생성이 필요하면 터읽기의 대지분석 덱 기능을 이용할 것. (전환 시작: 2026-08-25 · 30일 뒤 이 카드 링크를 내릴 예정)",
     icon: "🎯",
-    tags: ["PPT", "문서", "Claude", "python-pptx", "FastAPI", "유료", "담당자용"],
-    color: "#d97706",
+    tags: ["PPT", "문서", "터읽기로 흡수됨"],
+    color: "#94a3b8",
     type: "external",
-    status: "building",
+    status: "deprecated",
     tier: 2,
     category: "문서",
   },
@@ -1182,7 +1187,7 @@ const allTiers = [
   { key: 3, label: "🟩 T3 · 자체개발" },
 ];
 
-const STATUS_ORDER = ["live", "beta", "building", "draft", "idea"];
+const STATUS_ORDER = ["live", "beta", "building", "draft", "idea", "deprecated"];
 
 /* ── Filter ── */
 function filtered() {
@@ -1269,11 +1274,12 @@ function render() {
           <span class="arrow">${hasUrl ? '↗' : '→'}</span>
         </div>`;
 
+    const depCls = app.status === "deprecated" ? " is-deprecated" : "";
     if (hasUrl) {
-      return `<a class="card" href="${app.url}" target="_blank" rel="noopener noreferrer"
+      return `<a class="card${depCls}" href="${app.url}" target="_blank" rel="noopener noreferrer"
          style="--c:${app.color}" id="card-${idx}">${body}</a>`;
     } else {
-      return `<div class="card no-url" style="--c:${app.color}" id="card-${idx}"
+      return `<div class="card no-url${depCls}" style="--c:${app.color}" id="card-${idx}"
          onclick="openModal(${idx})">${body}</div>`;
     }
   }).join('');
@@ -1294,6 +1300,7 @@ const STATUS_NOTES = {
   building: "현재 업데이트 작업 중입니다. 오류 수정 후 다시 배포될 예정입니다.",
   draft:    "초안 단계입니다. 구체적인 개발 계획이 확정되면 업데이트됩니다.",
   idea:     "기획 단계의 아이디어입니다. 우선순위가 확정되면 개발을 시작할 예정입니다.",
+  deprecated: "다른 앱에 기능이 흡수되어 더 이상 별도로 운영하지 않습니다. 자세한 내용은 아래 설명을 확인하세요.",
 };
 
 const TIER_NOTES = {
